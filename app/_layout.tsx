@@ -2,11 +2,12 @@ import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import React, { useEffect } from "react";
+import { ThemeProvider } from "styled-components/native";
+import { theme } from "../theme/theme";
 
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-
   const [loaded, error] = useFonts({
     Poppins_400Regular: require("../assets/fonts/Poppins-Regular.ttf"),
     Poppins_500Medium: require("../assets/fonts/Poppins-Medium.ttf"),
@@ -25,6 +26,8 @@ export default function RootLayout() {
   }
 
   return (
-    <Stack screenOptions={{ headerShown: false }} />
+    <ThemeProvider theme={theme}>
+      <Stack screenOptions={{ headerShown: false }} />
+    </ThemeProvider>
   );
 }
