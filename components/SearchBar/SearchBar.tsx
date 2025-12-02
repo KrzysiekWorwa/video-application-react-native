@@ -1,11 +1,11 @@
 import { Container, Input, SearchIcon } from "./SearchBar.styled";
 
-export default function SearchBar({ placeholder, onPress }: Props) {
+interface Props {
+  placeholder: string;
+  onPress?: () => void;
+}
 
-  interface Props {
-    placeholder: string;
-    onPress?: () => void;
-  }
+export default function SearchBar({ placeholder, onPress }: Props) {
 
   return (
     <Container>

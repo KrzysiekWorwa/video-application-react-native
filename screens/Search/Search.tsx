@@ -11,7 +11,6 @@ export default function Search() {
     <Container>
       <SearchBarWrapper>
         <SearchBar 
-          onPress={() => router.push("/search")}
           placeholder="Search videos"
         />
       </SearchBarWrapper>
