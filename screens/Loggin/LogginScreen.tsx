@@ -1,5 +1,6 @@
 
-import { ButtonText, Container, Icon, LogginButton, LogginHeader, Logo, LogoWrapper, PolicyText, Wrapper } from "../Loggin/LoginScreen.styled";
+import { Linking } from "react-native";
+import { ButtonText, Container, Icon, LogginButton, LogginHeader, Logo, LogoWrapper, PolicyLink, PolicyText, Wrapper } from "../Loggin/LoginScreen.styled";
 
 export default function LogginScreen() {
     return (
@@ -16,7 +17,10 @@ export default function LogginScreen() {
                     <ButtonText>Log in as guest</ButtonText>
                 </LogginButton>
                 <PolicyText>
-                    By continuing you agree with Terms and Conditions and Privacy Polic
+                    By continuing you agree with{" "}
+                    <PolicyLink onPress={() => Linking.openURL("https://example.com/termsandconditions")}>Terms and Conditions</PolicyLink>
+                    {" "}and{" "}
+                    <PolicyLink onPress={() => Linking.openURL("https://example.com/privacy")}>Privacy Policy</PolicyLink>
                 </PolicyText>
             </Wrapper>
 

@@ -68,3 +68,13 @@ export const PolicyText = styled.Text`
     color: ${({ theme }) => theme.colors.textSecondary};
     text-align: center;
 `;
+
+export const PolicyLink = styled.Text`
+    font-family: ${({ theme }) => theme.fonts.regular};
+    font-size: ${({ theme }) => theme.fontSizes.smPlus}px;
+    font-family: ${({ theme }) => theme.fonts.semiBold};
+    line-height: ${({ theme }) => theme.lineHeight.m}px;
+    color: ${({ theme }) => theme.colors.textPrimary};
+    text-align: center;
+    text-decoration: underline;
+`;
