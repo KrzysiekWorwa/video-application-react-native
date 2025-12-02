@@ -1,8 +1,8 @@
 
 import { Linking } from "react-native";
-import { ButtonText, Container, Icon, LogginButton, LogginHeader, Logo, LogoWrapper, PolicyLink, PolicyText, Wrapper } from "../Loggin/LoginScreen.styled";
+import { ButtonText, Container, Icon, LogginButton, LogginHeader, Logo, LogoWrapper, PolicyLink, PolicyText, Wrapper } from "./LoginScreen.styled";
 
-export default function LogginScreen() {
+export default function LoginScreen() {
     return (
         <Container>
             <LogoWrapper>
