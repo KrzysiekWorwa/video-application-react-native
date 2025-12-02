@@ -9,3 +9,14 @@ export type YoutubeVideo = {
     publishedAt: string;
     description?: string;
 };
+
+function mapSearchItemToVideo(item: any): YoutubeVideo {
+    return {
+        id: item.id.videoId,
+        title: item.snippet.title,
+        thumbnail: item.snippet.thumbnails?.medium?.url,
+        channelTitle: item.snippet.channelTitle,
+        publishedAt: item.snippet.publishedAt,
+        description: item.snippet.description,
+    };
+}
