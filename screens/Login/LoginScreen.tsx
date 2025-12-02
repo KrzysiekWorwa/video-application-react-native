@@ -17,7 +17,7 @@ export default function LoginScreen() {
 
             <Wrapper>
                 <LogginHeader>Welcome to the best YouTube-based learning application.</LogginHeader>
-                <LogginButton onPress={() => router.replace("/(tabs)/home")}>
+                <LogginButton onPress={() => router.replace("/home")}>
                     <ButtonText>Log in as guest</ButtonText>
                 </LogginButton>
                 <PolicyText>

@@ -1,14 +1,21 @@
-import { Text, View } from "react-native";
+import { useRouter } from "expo-router";
+import { Text } from "react-native";
+import SearchBar from "../../components/SearchBar/SearchBar";
+import { Container, SearchBarWrapper } from "./Search.styled";
 
 export default function Search() {
+
+  const router = useRouter();
+
   return (
-    <View style={{
-      flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
-      backgroundColor: "white"
-    }}>
-      <Text style={{ fontSize: 24 }}>Welcome to Search page!</Text>
-    </View>
+    <Container>
+      <SearchBarWrapper>
+        <SearchBar 
+          onPress={() => router.push("/search")}
+          placeholder="Search videos"
+        />
+      </SearchBarWrapper>
+      <Text>Welcome to Search page!</Text>
+    </Container>
   );
 }

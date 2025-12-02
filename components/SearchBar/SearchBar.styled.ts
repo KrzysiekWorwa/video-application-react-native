@@ -6,9 +6,9 @@ export const Container = styled.View`
     display: flex;
     flex-direction: row;
     align-items: center;
-    background-color: ${({ theme }) => theme.colors.background};
     border-color: ${({ theme }) => theme.colors.primary};
-    border: solid 2px;
+    border-width: 2px;
+    border-style: solid;
     border-radius: 16px;
     height: 44px;
     width: 100%;
