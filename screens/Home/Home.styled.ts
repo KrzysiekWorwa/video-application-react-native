@@ -14,6 +14,7 @@ export const SearchBarWrapper = styled.View`
     align-items: center;
     gap: 16px;
     width: 100%;
+    margin-bottom: 23px;
 `;
 
 export const SettingsIcon = styled(SettingsSvg)`
