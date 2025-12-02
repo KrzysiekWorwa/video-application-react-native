@@ -35,3 +35,27 @@ export async function searchVideos(query: string, maxResults = 10) {
 
     return (json.items || []).map(mapSearchItemToVideo);
 }
+
+export async function getVideoDetails(videoId: string) {
+    const url =
+        `${BASE_URL}/videos?` +
+        `part=snippet,contentDetails,statistics` +
+        `&id=${videoId}` +
+        `&key=${API_KEY}`;
+
+    const res = await fetch(url);
+    const json = await res.json();
+    const item = json.items?.[0];
+
+    if (!item) return null;
+
+    return {
+        id: item.id,
+        title: item.snippet.title,
+        description: item.snippet.description,
+        thumbnail: item.snippet.thumbnails?.high?.url,
+        channelTitle: item.snippet.channelTitle,
+        publishedAt: item.snippet.publishedAt,
+        stats: item.statistics,
+    };
+}
