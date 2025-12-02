@@ -3,7 +3,7 @@ import styled from "styled-components/native";
 import SearchSvg from "../../assets/svg/icons/search-icon.svg";
 
 export const Container = styled.View`
-    display: flex;
+    flex: 1;
     flex-direction: row;
     align-items: center;
     border-color: ${({ theme }) => theme.colors.primary};
@@ -11,7 +11,6 @@ export const Container = styled.View`
     border-style: solid;
     border-radius: 16px;
     height: 44px;
-    width: 100%;
 `;
 
 export const SearchIcon = styled(SearchSvg)`

@@ -9,6 +9,6 @@ export const Container = styled.View`
 `;
 
 export const SearchBarWrapper = styled.View`
-    flex:  1;
-    width: 100%;
+    display: flex;
+    flex-direction: row;
 `;
