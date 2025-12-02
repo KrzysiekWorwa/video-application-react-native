@@ -20,3 +20,18 @@ function mapSearchItemToVideo(item: any): YoutubeVideo {
         description: item.snippet.description,
     };
 }
+
+export async function searchVideos(query: string, maxResults = 10) {
+    if (!query.trim()) return [];
+
+    const url =
+        `${BASE_URL}/search?` +
+        `part=snippet&type=video&maxResults=${maxResults}` +
+        `&q=${encodeURIComponent(query)}` +
+        `&key=${API_KEY}`;
+
+    const res = await fetch(url);
+    const json = await res.json();
+
+    return (json.items || []).map(mapSearchItemToVideo);
+}
