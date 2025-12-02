@@ -55,4 +55,6 @@ export const Separator = styled.View`
     margin-top: 24px;
     height: 2px;
     background-color: ${({ theme }) => theme.colors.primary};
+    margin-left: -24px; 
+    margin-right: -24px;
 `;
