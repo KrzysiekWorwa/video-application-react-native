@@ -29,6 +29,7 @@ export const theme = {
 
     lineHeight: {
         s: 12,
-        m: 24
+        m: 16,
+        l: 24
     },
 }
