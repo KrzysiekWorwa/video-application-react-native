@@ -1,8 +1,12 @@
 
+import { useRouter } from "expo-router";
 import { Linking } from "react-native";
 import { ButtonText, Container, Icon, LogginButton, LogginHeader, Logo, LogoWrapper, PolicyLink, PolicyText, Wrapper } from "./LoginScreen.styled";
 
 export default function LoginScreen() {
+
+    const router = useRouter();
+
     return (
         <Container>
             <LogoWrapper>
@@ -13,7 +17,7 @@ export default function LoginScreen() {
 
             <Wrapper>
                 <LogginHeader>Welcome to the best YouTube-based learning application.</LogginHeader>
-                <LogginButton>
+                <LogginButton onPress={() => router.replace("/(tabs)/home")}>
                     <ButtonText>Log in as guest</ButtonText>
                 </LogginButton>
                 <PolicyText>
