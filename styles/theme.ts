@@ -24,6 +24,11 @@ export const theme = {
         md: 14,
         lg: 16,
         xl: 18,
-        xxl: 22,
-    }
+        xxl: 21,
+    },
+
+    lineHeight: {
+        s: 12,
+        m: 24
+    },
 }

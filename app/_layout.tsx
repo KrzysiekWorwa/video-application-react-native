@@ -3,7 +3,7 @@ import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import React, { useEffect } from "react";
 import { ThemeProvider } from "styled-components/native";
-import { theme } from "../theme/theme";
+import { theme } from "../styles/theme";
 
 SplashScreen.preventAutoHideAsync();
 
