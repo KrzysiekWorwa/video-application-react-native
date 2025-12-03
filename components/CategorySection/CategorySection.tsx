@@ -29,11 +29,18 @@ export default function CategorySection({ title, query }: Props) {
         router.push({ pathname: "/search", params: { query } });
     };
 
+    const handlePressVideo = (video: YoutubeVideo) => {
+        router.push({
+            pathname: "/video/[id]",
+            params: { id: video.id },
+        });
+    };
+
     const renderItem = ({ item }: { item: YoutubeVideo }) => {
         const date = new Date(item.publishedAt).toLocaleDateString("pl-PL");
 
         return (
-            <Card activeOpacity={0.8}>
+            <Card activeOpacity={0.8} onPress={() => handlePressVideo(item)}>
                 <Image
                     source={{ uri: item.thumbnail }}
                     style={{

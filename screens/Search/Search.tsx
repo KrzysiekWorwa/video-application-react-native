@@ -2,30 +2,17 @@ import { SearchSection } from "@/components/SearchSection/SearchSection";
 import { SortCard } from "@/components/SortCard/SortCard";
 import { useDebounce } from "@/hooks/useDebounce";
 import { useFetch } from "@/hooks/useFetch";
-import {
-  searchVideos,
-  SortOption,
-  YoutubeSearchResult,
-  YoutubeVideo,
-} from "@/services/api";
-import { useLocalSearchParams } from "expo-router";
+import { searchVideos, SortOption, YoutubeSearchResult, YoutubeVideo, } from "@/services/api";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
-import {
-  ActivityIndicator,
-  FlatList,
-  TouchableOpacity,
-} from "react-native";
+import { ActivityIndicator, FlatList, TouchableOpacity, } from "react-native";
 import SearchBar from "../../components/SearchBar/SearchBar";
-import {
-  Container,
-  ResultsNumber,
-  ResultTitle,
-  SearchBarWrapper,
-  SortCategory,
-  SortText,
-} from "./Search.styled";
+import { Container, ResultsNumber, ResultTitle, SearchBarWrapper, SortCategory, SortText, } from "./Search.styled";
 
 export default function Search() {
+
+  const router = useRouter();
+
   const params = useLocalSearchParams<{ query?: string }>();
   const initialQuery = typeof params.query === "string" ? params.query : "";
 
@@ -101,6 +88,13 @@ export default function Search() {
     }
   };
 
+  const handlePressVideo = (video: YoutubeVideo) => {
+    router.push({
+      pathname: "/video/[id]",
+      params: { id: video.id },
+    });
+  };
+
   return (
     <Container>
       <SearchBarWrapper>
@@ -135,8 +129,7 @@ export default function Search() {
           renderItem={({ item }) => (
             <SearchSection
               video={item}
-              onPress={() => {
-              }}
+              onPress={() => handlePressVideo(item)}
             />
           )}
           showsVerticalScrollIndicator={false}
