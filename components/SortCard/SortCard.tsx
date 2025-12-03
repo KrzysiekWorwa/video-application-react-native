@@ -1,6 +1,5 @@
 import { SortOption } from "@/services/api";
 import React from "react";
-import { Modal } from "react-native";
 import {
     Backdrop,
     ConfirmButton,
@@ -21,6 +20,9 @@ type Props = {
 };
 
 export function SortCard({ visible, selected, onSelect, onConfirm }: Props) {
+
+    if (!visible) return null;
+
     const renderOption = (value: SortOption, label: string) => (
         <OptionRow onPress={() => onSelect(value)}>
             <RadioOuter>
@@ -31,20 +33,18 @@ export function SortCard({ visible, selected, onSelect, onConfirm }: Props) {
     );
 
     return (
-        <Modal transparent visible={visible} animationType="fade" onRequestClose={onConfirm}>
-            <Backdrop>
-                <ModalCard>
-                    <ModalTitle>Sort records by:</ModalTitle>
+        <Backdrop>
+            <ModalCard>
+                <ModalTitle>Sort records by:</ModalTitle>
 
-                    {renderOption("latest", "Upload date: latest")}
-                    {renderOption("oldest", "Upload date: oldest")}
-                    {renderOption("popular", "Most popular")}
+                {renderOption("latest", "Upload date: latest")}
+                {renderOption("oldest", "Upload date: oldest")}
+                {renderOption("popular", "Most popular")}
 
-                    <ConfirmButton onPress={onConfirm}>
-                        <ConfirmText>Confirm</ConfirmText>
-                    </ConfirmButton>
-                </ModalCard>
-            </Backdrop>
-        </Modal>
+                <ConfirmButton onPress={onConfirm}>
+                    <ConfirmText>Confirm</ConfirmText>
+                </ConfirmButton>
+            </ModalCard>
+        </Backdrop>
     );
 }
