@@ -10,6 +10,11 @@ export type YoutubeVideo = {
     description?: string;
 };
 
+export type YoutubeSearchResult = {
+    videos: YoutubeVideo[];
+    totalResults: number;
+};
+
 function mapSearchItemToVideo(item: any): YoutubeVideo {
     return {
         id: item.id.videoId,
@@ -21,8 +26,11 @@ function mapSearchItemToVideo(item: any): YoutubeVideo {
     };
 }
 
-export async function searchVideos(query: string, maxResults = 10) {
-    if (!query.trim()) return [];
+export async function searchVideos(query: string, maxResults = 10): Promise<YoutubeSearchResult> {
+    
+    if (!query.trim()) {
+        return { videos: [], totalResults: 0 };
+    }
 
     const url =
         `${BASE_URL}/search?` +
@@ -33,7 +41,14 @@ export async function searchVideos(query: string, maxResults = 10) {
     const res = await fetch(url);
     const json = await res.json();
 
-    return (json.items || []).map(mapSearchItemToVideo);
+    const videos = (json.items || []).map(mapSearchItemToVideo);
+
+    const totalResults =
+        json.pageInfo?.totalResults != null
+            ? json.pageInfo.totalResults
+            : videos.length;
+
+    return { videos, totalResults };
 }
 
 export async function getVideoDetails(videoId: string) {
