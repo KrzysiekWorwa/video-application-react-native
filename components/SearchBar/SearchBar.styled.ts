@@ -25,5 +25,6 @@ export const Input = styled.TextInput`
     padding-left: 0;
     padding-right: 0;
     font-size: ${({ theme }) => theme.fontSizes.lg}px;
+    color: ${({ theme }) => theme.colors.textPrimary};
 `;
 

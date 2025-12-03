@@ -3,7 +3,6 @@ import styled from "styled-components/native";
 export const Container = styled.View`
     margin-top: 8px;
     background-color: ${({ theme }) => theme.colors.background};
-    color: ${({ theme }) => theme.colors.textPrimary};
 `;
 
 export const TextWrapper = styled.View`
@@ -14,6 +13,7 @@ export const TextWrapper = styled.View`
 `;
 
 export const Header = styled.Text`
+    color: ${({ theme }) => theme.colors.textPrimary};
     font-family: ${({ theme }) => theme.fonts.semiBold};
     font-size: ${({ theme }) => theme.fontSizes.xl}px;
     line-height: ${({ theme }) => theme.lineHeight.l}px;
@@ -21,6 +21,7 @@ export const Header = styled.Text`
 `;
 
 export const ShowMoreText = styled.Text`
+    color: ${({ theme }) => theme.colors.textPrimary};
     font-family: ${({ theme }) => theme.fonts.regular};
     font-size: ${({ theme }) => theme.fontSizes.sm}px;
     line-height: ${({ theme }) => theme.lineHeight.l}px;
@@ -35,6 +36,7 @@ export const Card = styled.TouchableOpacity`
 `;
 
 export const VideoTitle = styled.Text`
+    color: ${({ theme }) => theme.colors.textPrimary};
     margin-top: 2px;
     font-family: ${({ theme }) => theme.fonts.medium};
     font-size: ${({ theme }) => theme.fontSizes.sm}px;
@@ -43,6 +45,7 @@ export const VideoTitle = styled.Text`
 `;
 
 export const PublishDate = styled.Text`
+    color: ${({ theme }) => theme.colors.textPrimary};
     margin-top: 4px;
     font-family: ${({ theme }) => theme.fonts.regular};
     font-size: ${({ theme }) => theme.fontSizes.xs}px;
