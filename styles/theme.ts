@@ -22,6 +22,7 @@ export const theme = {
         sm: 12,
         smPlus: 13,
         md: 14,
+        mdPlus: 15,
         lg: 16,
         xl: 18,
         xxl: 21,
