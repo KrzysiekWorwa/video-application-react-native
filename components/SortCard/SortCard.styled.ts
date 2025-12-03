@@ -2,7 +2,7 @@ import styled from "styled-components/native";
 
 export const Backdrop = styled.View`
   flex: 1;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.8);
   justify-content: center;
   align-items: center;
 `;
@@ -18,13 +18,13 @@ export const ModalTitle = styled.Text`
   font-family: ${({ theme }) => theme.fonts.semiBold};
   font-size: ${({ theme }) => theme.fontSizes.xl}px;
   color: ${({ theme }) => theme.colors.textSecondary};
-  line-height: ${({ theme }) => theme.lineHeight.s}px;
   margin-bottom: 24px;
 `;
 
 export const OptionRow = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
+  margin-bottom: 24px;
 `;
 
 export const RadioOuter = styled.View`
@@ -53,8 +53,9 @@ export const OptionLabel = styled.Text`
 `;
 
 export const ConfirmButton = styled.TouchableOpacity`
-  margin-top: 128px;
+  margin-top: 100px;
   width: 100%;
+  height: 40px;
   border-radius: 8px;
   background-color: ${({ theme }) => theme.colors.primary};
   justify-content: center;
