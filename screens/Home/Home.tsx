@@ -4,10 +4,10 @@ import SearchBar from "../../components/SearchBar/SearchBar";
 import { Container, SearchBarWrapper, SettingsIcon } from "./Home.styled";
 
 const CATEGORIES = [
-  { title: "React Native", query: "React Native" },
-  { title: "React", query: "React" },
-  { title: "Typescript", query: "Typescript" },
-  { title: "Javascript", query: "Javascript" },
+  { title: "React Native", query: "React Native tutorial" },
+  { title: "React", query: "React tutorial" },
+  { title: "Typescript", query: "Typescript tutorial" },
+  { title: "Javascript", query: "Javascript tutorial" },
 ];
 
 export default function Home() {

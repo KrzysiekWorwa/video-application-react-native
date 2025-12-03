@@ -2,21 +2,40 @@ import { SearchSection } from "@/components/SearchSection/SearchSection";
 import { SortCard } from "@/components/SortCard/SortCard";
 import { useDebounce } from "@/hooks/useDebounce";
 import { useFetch } from "@/hooks/useFetch";
-import { searchVideos, SortOption, YoutubeSearchResult } from "@/services/api";
+import {
+  searchVideos,
+  SortOption,
+  YoutubeSearchResult,
+  YoutubeVideo,
+} from "@/services/api";
 import { useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
-import { ActivityIndicator, FlatList, TouchableOpacity } from "react-native";
+import {
+  ActivityIndicator,
+  FlatList,
+  TouchableOpacity,
+} from "react-native";
 import SearchBar from "../../components/SearchBar/SearchBar";
-import { Container, ResultsNumber, ResultTitle, SearchBarWrapper, SortCategory, SortText } from "./Search.styled";
+import {
+  Container,
+  ResultsNumber,
+  ResultTitle,
+  SearchBarWrapper,
+  SortCategory,
+  SortText,
+} from "./Search.styled";
 
 export default function Search() {
-
   const params = useLocalSearchParams<{ query?: string }>();
   const initialQuery = typeof params.query === "string" ? params.query : "";
 
   const [searchText, setSearchText] = useState(initialQuery);
   const [sort, setSort] = useState<SortOption>("popular");
   const [isSortVisible, setIsSortVisible] = useState(false);
+
+  const [videos, setVideos] = useState<YoutubeVideo[]>([]);
+  const [nextPageToken, setNextPageToken] = useState<string | null>(null);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
 
   useEffect(() => {
     if (initialQuery) {
@@ -30,12 +49,22 @@ export default function Search() {
     () =>
       debouncedSearchText
         ? searchVideos(debouncedSearchText, 20, sort)
-        : Promise.resolve({ videos: [], totalResults: 0 }),
+        : Promise.resolve({ videos: [], totalResults: 0, nextPageToken: undefined }),
     [debouncedSearchText, sort]
   );
 
+  useEffect(() => {
+    if (!data) {
+      setVideos([]);
+      setNextPageToken(null);
+      return;
+    }
+
+    setVideos(data.videos);
+    setNextPageToken(data.nextPageToken ?? null);
+  }, [data]);
+
   const resultsCount = data?.totalResults ?? 0;
-  const videos = data?.videos ?? [];
   const hasQuery = searchText.trim().length > 0;
   const currentQuery = searchText || initialQuery;
 
@@ -43,6 +72,26 @@ export default function Search() {
     latest: "Upload date: latest",
     oldest: "Upload date: oldest",
     popular: "Most popular",
+  };
+
+  const handleLoadMore = async () => {
+    if (!nextPageToken || isLoadingMore || loading) return;
+    if (!debouncedSearchText.trim()) return;
+
+    try {
+      setIsLoadingMore(true);
+      const more = await searchVideos(
+        debouncedSearchText,
+        20,
+        sort,
+        nextPageToken
+      );
+
+      setVideos((prev) => [...prev, ...more.videos]);
+      setNextPageToken(more.nextPageToken ?? null);
+    } finally {
+      setIsLoadingMore(false);
+    }
   };
 
   return (
@@ -58,7 +107,8 @@ export default function Search() {
       {hasQuery && (
         <>
           <ResultsNumber>
-            {resultsCount} results found for: <ResultTitle>"{currentQuery}"</ResultTitle>
+            {resultsCount} results found for:{" "}
+            <ResultTitle>"{currentQuery}"</ResultTitle>
           </ResultsNumber>
 
           <TouchableOpacity onPress={() => setIsSortVisible(true)}>
@@ -84,6 +134,13 @@ export default function Search() {
           )}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ paddingBottom: 24 }}
+          onEndReached={handleLoadMore}
+          onEndReachedThreshold={0.5}
+          ListFooterComponent={
+            isLoadingMore ? (
+              <ActivityIndicator style={{ marginVertical: 16 }} />
+            ) : null
+          }
         />
       )}
 

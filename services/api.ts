@@ -13,6 +13,7 @@ export type YoutubeVideo = {
 export type YoutubeSearchResult = {
     videos: YoutubeVideo[];
     totalResults: number;
+    nextPageToken?: string;
 };
 
 export type SortOption = "latest" | "oldest" | "popular";
@@ -28,7 +29,7 @@ function mapSearchItemToVideo(item: any): YoutubeVideo {
     };
 }
 
-export async function searchVideos(query: string, maxResults = 10, sort: SortOption = "popular"): Promise<YoutubeSearchResult> {
+export async function searchVideos(query: string, maxResults = 10, sort: SortOption = "popular", pageToken?: string): Promise<YoutubeSearchResult> {
 
     if (!query.trim()) {
         return { videos: [], totalResults: 0 };
@@ -41,7 +42,8 @@ export async function searchVideos(query: string, maxResults = 10, sort: SortOpt
     const url =
         `${BASE_URL}/search?` +
         `part=snippet&type=video&maxResults=${maxResults}` +
-        `&order=${order}` +
+        `&order=${order}`
+        + (pageToken ? `&pageToken=${pageToken}` : "") +
         `&q=${encodeURIComponent(query)}` +
         `&key=${API_KEY}`;
 
@@ -60,7 +62,11 @@ export async function searchVideos(query: string, maxResults = 10, sort: SortOpt
             ? json.pageInfo.totalResults
             : videos.length;
 
-    return { videos, totalResults };
+    return {
+        videos,
+        totalResults,
+        nextPageToken: json.nextPageToken,
+    };
 }
 
 export async function getVideoDetails(videoId: string) {
