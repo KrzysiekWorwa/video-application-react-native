@@ -1,10 +1,11 @@
 import { SearchSection } from "@/components/SearchSection/SearchSection";
+import { SortCard } from "@/components/SortCard/SortCard";
 import { useDebounce } from "@/hooks/useDebounce";
 import { useFetch } from "@/hooks/useFetch";
-import { searchVideos, YoutubeSearchResult } from "@/services/api";
+import { searchVideos, SortOption, YoutubeSearchResult } from "@/services/api";
 import { useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
-import { ActivityIndicator, FlatList } from "react-native";
+import { ActivityIndicator, FlatList, TouchableOpacity } from "react-native";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import { Container, ResultsNumber, ResultTitle, SearchBarWrapper, SortCategory, SortText } from "./Search.styled";
 
@@ -14,7 +15,8 @@ export default function Search() {
   const initialQuery = typeof params.query === "string" ? params.query : "";
 
   const [searchText, setSearchText] = useState(initialQuery);
-
+  const [sort, setSort] = useState<SortOption>("popular");
+  const [isSortVisible, setIsSortVisible] = useState(false);
 
   useEffect(() => {
     if (initialQuery) {
@@ -27,15 +29,21 @@ export default function Search() {
   const { data, loading } = useFetch<YoutubeSearchResult>(
     () =>
       debouncedSearchText
-        ? searchVideos(debouncedSearchText, 20)
+        ? searchVideos(debouncedSearchText, 20, sort)
         : Promise.resolve({ videos: [], totalResults: 0 }),
-    [debouncedSearchText]
+    [debouncedSearchText, sort]
   );
 
   const resultsCount = data?.totalResults ?? 0;
   const videos = data?.videos ?? [];
   const hasQuery = searchText.trim().length > 0;
   const currentQuery = searchText || initialQuery;
+
+  const sortLabelMap: Record<SortOption, string> = {
+    latest: "Upload date: latest",
+    oldest: "Upload date: oldest",
+    popular: "Most popular",
+  };
 
   return (
     <Container>
@@ -53,9 +61,11 @@ export default function Search() {
             {resultsCount} results found for: <ResultTitle>"{currentQuery}"</ResultTitle>
           </ResultsNumber>
 
-          <SortText>
-            Sort by: <SortCategory>Most popular</SortCategory>
-          </SortText>
+          <TouchableOpacity onPress={() => setIsSortVisible(true)}>
+            <SortText>
+              Sort by: <SortCategory>{sortLabelMap[sort]}</SortCategory>
+            </SortText>
+          </TouchableOpacity>
         </>
       )}
 
@@ -76,6 +86,13 @@ export default function Search() {
           contentContainerStyle={{ paddingBottom: 24 }}
         />
       )}
+
+      <SortCard
+        visible={isSortVisible}
+        selected={sort}
+        onSelect={setSort}
+        onConfirm={() => setIsSortVisible(false)}
+      />
     </Container>
   );
 }
