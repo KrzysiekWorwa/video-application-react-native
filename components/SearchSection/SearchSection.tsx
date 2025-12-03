@@ -19,8 +19,7 @@ export function SearchSection({ video, onPress }: Props) {
         style={{
           width: "100%",
           height: 200,
-          borderTopLeftRadius: 16,
-          borderTopRightRadius: 16,
+          borderRadius: 16,
         }}
         resizeMode="cover"
       />
