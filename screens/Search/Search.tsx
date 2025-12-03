@@ -34,6 +34,10 @@ export default function Search() {
     [debouncedSearchText]
   );
 
+  const resultsCount = data?.length ?? 0;
+  const hasQuery = searchText.trim().length > 0;
+  const currentQuery = searchText || initialQuery;
+
   return (
     <Container>
       <SearchBarWrapper>
@@ -44,8 +48,17 @@ export default function Search() {
         />
       </SearchBarWrapper>
 
-      <ResultsNumber>1157 results found for: <ResultTitle>“React Native”</ResultTitle></ResultsNumber>
-      <SortText>Sort by: <SortCategory>Most popular</SortCategory></SortText>
+      {hasQuery && (
+        <>
+          <ResultsNumber>
+            {resultsCount} results found for: <ResultTitle>"{currentQuery}"</ResultTitle>
+          </ResultsNumber>
+
+          <SortText>
+            Sort by: <SortCategory>Most popular</SortCategory>
+          </SortText>
+        </>
+      )}
 
       {loading && <ActivityIndicator style={{ marginTop: 24 }} />}
 
