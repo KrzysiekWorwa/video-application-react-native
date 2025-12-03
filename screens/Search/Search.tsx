@@ -3,7 +3,7 @@ import { useDebounce } from "@/hooks/useDebounce";
 import { useFetch } from "@/hooks/useFetch";
 import { searchVideos, YoutubeVideo } from "@/services/api";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ActivityIndicator, FlatList } from "react-native";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import { Container, SearchBarWrapper } from "./Search.styled";
@@ -16,6 +16,13 @@ export default function Search() {
   const initialQuery = typeof params.query === "string" ? params.query : "";
 
   const [searchText, setSearchText] = useState(initialQuery);
+
+
+  useEffect(() => {
+    if (initialQuery) {
+      setSearchText(initialQuery);
+    }
+  }, [initialQuery]);
 
   const debouncedSearchText = useDebounce(searchText, 500);
 

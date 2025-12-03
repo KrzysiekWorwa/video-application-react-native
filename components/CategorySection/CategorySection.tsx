@@ -24,7 +24,7 @@ export default function CategorySection({ title, query }: Props) {
     );
 
     const handleShowMore = () => {
-        router.push({ pathname: "/search", params: { query: title } });
+        router.push({ pathname: "/search", params: { query } });
     };
 
     const renderItem = ({ item }: { item: YoutubeVideo }) => {
