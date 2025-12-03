@@ -1,4 +1,5 @@
 import { SearchSection } from "@/components/SearchSection/SearchSection";
+import { useDebounce } from "@/hooks/useDebounce";
 import { useFetch } from "@/hooks/useFetch";
 import { searchVideos, YoutubeVideo } from "@/services/api";
 import { useLocalSearchParams, useRouter } from "expo-router";
@@ -16,9 +17,14 @@ export default function Search() {
 
   const [searchText, setSearchText] = useState(initialQuery);
 
+  const debouncedSearchText = useDebounce(searchText, 500);
+
   const { data, loading } = useFetch<YoutubeVideo[]>(
-    () => searchVideos(searchText || initialQuery, 20),
-    [searchText, initialQuery]
+    () =>
+      debouncedSearchText
+        ? searchVideos(debouncedSearchText, 20)
+        : Promise.resolve([]),
+    [debouncedSearchText]
   );
 
   return (
