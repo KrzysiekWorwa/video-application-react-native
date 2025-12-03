@@ -28,13 +28,7 @@
       [
         "react-native-video",
         {
-          "enableNotificationControls": true,
-          "androidExtensions": {
-            "useExoplayerRtsp": false,
-            "useExoplayerSmoothStreaming": false,
-            "useExoplayerHls": false,
-            "useExoplayerDash": false
-          }
+          "enableNotificationControls": true
         }
       ],
       "expo-router",
@@ -42,11 +36,11 @@
         "expo-splash-screen",
         {
           "image": "./assets/images/logo.png",
-          "imageWidth": 200,
+          "imageWidth": 300,
           "resizeMode": "contain",
           "backgroundColor": "#8D99AE",
           "dark": {
-            "backgroundColor": "#000000"
+            "backgroundColor": "#8D99AE"
           }
         }
       ],

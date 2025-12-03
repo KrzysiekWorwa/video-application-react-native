@@ -22,6 +22,7 @@ export default function SearchBar({ placeholder, value, onChangeText, onPress, n
       <SearchIcon width={24} height={24} />
       <Input
         placeholder={placeholder}
+        placeholderTextColor="#8D99AE"
         value={value}
         onChangeText={editable ? onChangeText : undefined}
         editable={editable}
