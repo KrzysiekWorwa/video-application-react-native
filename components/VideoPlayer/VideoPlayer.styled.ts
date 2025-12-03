@@ -1,5 +1,14 @@
 import styled from "styled-components/native";
 
+import AirPlaySvg from "../../assets/svg/icons/airplay-icon.svg";
+import BackSvg from "../../assets/svg/icons/backward-icon.svg";
+import ForwardSvg from "../../assets/svg/icons/forward-icon.svg";
+import FullScreenSvg from "../../assets/svg/icons/fullscreen-icon.svg";
+import ArrowSvg from "../../assets/svg/icons/leftarrow-icon.svg";
+import PauseSvg from "../../assets/svg/icons/pause-icon.svg";
+import PlaySvg from "../../assets/svg/icons/play-icon.svg";
+import VolumeSvg from "../../assets/svg/icons/volume-icon.svg";
+
 export const PlayerWrapper = styled.View`
   background-color: ${({ theme }) => theme.colors.background};
 `;
@@ -76,4 +85,35 @@ export const TimeText = styled.Text`
 
 export const FullscreenButton = styled.TouchableOpacity`
   padding: 4px;
+`;
+
+export const ArrowIcon = styled(ArrowSvg)`
+    color: ${({ theme }) => theme.colors.textSecondary};
+`;
+
+export const BackIcon = styled(BackSvg)`
+    color: ${({ theme }) => theme.colors.textSecondary};
+`;
+
+export const ForwardIcon = styled(ForwardSvg)`
+    color: ${({ theme }) => theme.colors.textSecondary};
+`;
+
+export const FullScreenIcon = styled(FullScreenSvg)`
+    color: ${({ theme }) => theme.colors.textSecondary};
+`;
+
+export const PauseIcon = styled(PauseSvg)`
+    color: ${({ theme }) => theme.colors.textSecondary};
+`;
+export const PlayIcon = styled(PlaySvg)`
+    color: ${({ theme }) => theme.colors.textSecondary};
+`;
+
+export const VolumeIcon = styled(VolumeSvg)`
+    color: ${({ theme }) => theme.colors.textSecondary};
+`;
+
+export const AirPlayIcon = styled(AirPlaySvg)`
+    color: ${({ theme }) => theme.colors.textSecondary};
 `;
