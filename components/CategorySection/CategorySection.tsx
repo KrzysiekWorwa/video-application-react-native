@@ -1,5 +1,5 @@
 import { useFetch } from "@/hooks/useFetch";
-import { searchVideos, YoutubeVideo } from "@/services/api";
+import { searchVideos, YoutubeSearchResult, YoutubeVideo } from "@/services/api";
 import { useRouter } from "expo-router";
 import { FlatList, Image } from "react-native";
 import {
@@ -18,10 +18,12 @@ type Props = {
 export default function CategorySection({ title, query }: Props) {
     const router = useRouter();
 
-    const { data, loading } = useFetch<YoutubeVideo[]>(
+    const { data, loading } = useFetch<YoutubeSearchResult>(
         () => searchVideos(query, 10),
         []
     );
+
+    const videos = data?.videos ?? [];
 
     const handleShowMore = () => {
         router.push({ pathname: "/search", params: { query } });
@@ -59,7 +61,7 @@ export default function CategorySection({ title, query }: Props) {
             {!loading && data && (
                 <FlatList
                     horizontal
-                    data={data}
+                    data={videos}
                     keyExtractor={(item) => item.id}
                     showsHorizontalScrollIndicator={false}
                     renderItem={renderItem}
