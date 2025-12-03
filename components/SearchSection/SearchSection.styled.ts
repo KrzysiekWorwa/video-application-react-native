@@ -1,12 +1,12 @@
 import styled from "styled-components/native";
 
-export const Card = styled.TouchableOpacity`
+export const SearchCard = styled.TouchableOpacity`
     width: 345px;
     margin-top: 12px;
     color: ${({ theme }) => theme.colors.textPrimary};
 `;
 
-export const ChannelName = styled.Text`
+export const  SearchChannelName = styled.Text`
     font-family: ${({ theme }) => theme.fonts.bold};
     font-size: ${({ theme }) => theme.fontSizes.sm}px;
     line-height: ${({ theme }) => theme.lineHeight.s}px;
@@ -15,7 +15,7 @@ export const ChannelName = styled.Text`
     margin-bottom: 12px;
 `;
 
-export const VideoTitle = styled.Text`
+export const SearchVideoTitle = styled.Text`
     font-family: ${({ theme }) => theme.fonts.regular};
     font-size: ${({ theme }) => theme.fontSizes.mdPlus}px;
     line-height: ${({ theme }) => theme.lineHeight.s}px;
@@ -23,7 +23,7 @@ export const VideoTitle = styled.Text`
     margin-bottom: 12px;
 `;
 
-export const PublishDate = styled.Text`
+export const SearchPublishDate = styled.Text`
     margin-top: 4px;
     font-family: ${({ theme }) => theme.fonts.regular};
     font-size: ${({ theme }) => theme.fontSizes.xs}px;
