@@ -1,9 +1,8 @@
 import styled from "styled-components/native";
 import SettingsSvg from "../../assets/svg/icons/settings-icon.svg";
 
-export const Container = styled.View`
+export const Container = styled.ScrollView`
     flex: 1;
-    align-items: center;
     padding: 40px 24px;
     background-color: ${({ theme }) => theme.colors.background};
 `;

@@ -1,7 +1,6 @@
 import styled from "styled-components/native";
 
 export const Container = styled.View`
-    flex: 1;
     margin-top: 8px;
     background-color: ${({ theme }) => theme.colors.background};
     color: ${({ theme }) => theme.colors.textPrimary};
@@ -32,14 +31,14 @@ export const ShowMoreText = styled.Text`
 export const Card = styled.TouchableOpacity`
     width: 180px;
     margin-right: 16px;
-    margin-top: 24px;
+    margin-top: 16px;
 `;
 
 export const VideoTitle = styled.Text`
     margin-top: 2px;
     font-family: ${({ theme }) => theme.fonts.medium};
     font-size: ${({ theme }) => theme.fontSizes.sm}px;
-    line-height: ${({ theme }) => theme.lineHeight.s}px;
+    line-height: ${({ theme }) => theme.lineHeight.m}px;
     letter-spacing: 0.12px;
 `;
 
@@ -49,10 +48,11 @@ export const PublishDate = styled.Text`
     font-size: ${({ theme }) => theme.fontSizes.xs}px;
     line-height: ${({ theme }) => theme.lineHeight.l}px;
     letter-spacing: 0.1px;
+    text-align: right;
 `;
 
 export const Separator = styled.View`
-    margin-top: 24px;
+    margin-top: 13px;
     height: 2px;
     background-color: ${({ theme }) => theme.colors.primary};
     margin-left: -24px; 

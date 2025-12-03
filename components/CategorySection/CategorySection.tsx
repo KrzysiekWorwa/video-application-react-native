@@ -35,8 +35,8 @@ export default function CategorySection({ title, query }: Props) {
                 <Image
                     source={{ uri: item.thumbnail }}
                     style={{
-                        width: 220,
-                        height: 120,
+                        width: 180,
+                        height: 112,
                         borderRadius: 12,
                         backgroundColor: "#000",
                     }}
@@ -63,7 +63,7 @@ export default function CategorySection({ title, query }: Props) {
                     keyExtractor={(item) => item.id}
                     showsHorizontalScrollIndicator={false}
                     renderItem={renderItem}
-                    style={{ marginTop: 12 }}
+                    style={{ marginRight: -24 }}
                 />
             )}
 

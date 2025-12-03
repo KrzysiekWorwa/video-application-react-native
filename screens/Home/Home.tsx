@@ -15,7 +15,7 @@ export default function Home() {
   const router = useRouter();
 
   return (
-    <Container>
+    <Container contentContainerStyle={{ paddingBottom: 35 }}>
       <SearchBarWrapper>
         <SearchBar
           onPress={() => router.push("/search")}
