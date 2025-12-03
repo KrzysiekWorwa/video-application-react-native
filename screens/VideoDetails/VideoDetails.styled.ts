@@ -3,7 +3,12 @@ import LikesSvg from "../../assets/svg/icons/likes-icon.svg";
 import PersonSvg from "../../assets/svg/icons/person-icon.svg";
 import ViewsSvg from "../../assets/svg/icons/views-icon.svg";
 
-export const InfoContaier = styled.View`
+export const InfoContaier = styled.ScrollView.attrs({
+  showsVerticalScrollIndicator: false,
+  contentContainerStyle: {
+    paddingBottom: 40,
+  },
+})`
     flex: 1;
     padding: 20px 24px;
     background-color: ${({ theme }) => theme.colors.background};
@@ -66,6 +71,12 @@ export const SwitchLine = styled.View`
     background-color: ${({ theme }) => theme.colors.primary};
 `;
 
+export const UnactiveSwitchLine = styled.View`
+    width: 100%;
+    height: 2px;
+    background-color: #C8C8C8;
+`;
+
 export const DescriptionTitle = styled.Text`
     color: ${({ theme }) => theme.colors.textPrimary};
     font-family: ${({ theme }) => theme.fonts.semiBold};
@@ -95,7 +106,6 @@ export const StatisticBox = styled.View`
     width: 136px;
     border-radius: 8px;
     background-color: ${({ theme }) => theme.colors.primary};
-    justify-content: start;
     align-items: center;
     padding: 6px 8px;
 `;

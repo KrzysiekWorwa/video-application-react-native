@@ -1,7 +1,7 @@
 import { useFetch } from "@/hooks/useFetch";
 import { getVideoDetails } from "@/services/api";
 import { useLocalSearchParams } from "expo-router";
-import { ChannelName, ChannelWrapper, Description, DescriptionTitle, IconCircle, InfoContaier, LikesIcon, PersonIcon, StatisticBox, StatisticText, StatisticWrapper, SwitchButton, SwitchLine, SwitchsWrapper, SwitchText, VideoTitle, ViewsIcon } from "./VideoDetails.styled";
+import { ChannelName, ChannelWrapper, Description, DescriptionTitle, IconCircle, InfoContaier, LikesIcon, PersonIcon, StatisticBox, StatisticText, StatisticWrapper, SwitchButton, SwitchLine, SwitchsWrapper, SwitchText, UnactiveSwitchLine, VideoTitle, ViewsIcon } from "./VideoDetails.styled";
 
 export default function VideoDetails() {
     const { id } = useLocalSearchParams<{ id: string }>();
@@ -50,7 +50,7 @@ export default function VideoDetails() {
 
                 <SwitchButton>
                     <SwitchText>Notes</SwitchText>
-                    <SwitchLine />
+                    <UnactiveSwitchLine />
                 </SwitchButton>
             </SwitchsWrapper>
 
