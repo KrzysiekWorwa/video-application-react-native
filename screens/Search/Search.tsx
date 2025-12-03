@@ -6,7 +6,7 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, FlatList } from "react-native";
 import SearchBar from "../../components/SearchBar/SearchBar";
-import { Container, SearchBarWrapper } from "./Search.styled";
+import { Container, ResultsNumber, ResultTitle, SearchBarWrapper, SortCategory, SortText } from "./Search.styled";
 
 export default function Search() {
 
@@ -43,6 +43,9 @@ export default function Search() {
           onChangeText={setSearchText}
         />
       </SearchBarWrapper>
+
+      <ResultsNumber>1157 results found for: <ResultTitle>“React Native”</ResultTitle></ResultsNumber>
+      <SortText>Sort by: <SortCategory>Most popular</SortCategory></SortText>
 
       {loading && <ActivityIndicator style={{ marginTop: 24 }} />}
 

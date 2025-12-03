@@ -2,7 +2,7 @@ import styled from "styled-components/native";
 
 export const SearchCard = styled.TouchableOpacity`
     width: 100%;
-    margin-top: 24px;
+    margin-top: 12px;
 `;
 
 export const SearchChannelName = styled.Text`
