@@ -17,13 +17,26 @@
         "foregroundImage": "./assets/images/app-icon.png"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.anonymous.youtubelearn"
     },
     "web": {
       "output": "static",
       "favicon": "./assets/images/app-icon.png"
     },
     "plugins": [
+      [
+        "react-native-video",
+        {
+          "enableNotificationControls": true,
+          "androidExtensions": {
+            "useExoplayerRtsp": false,
+            "useExoplayerSmoothStreaming": false,
+            "useExoplayerHls": false,
+            "useExoplayerDash": false
+          }
+        }
+      ],
       "expo-router",
       [
         "expo-splash-screen",
@@ -42,6 +55,12 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "eaf0eda9-09b0-4f40-b8e7-ec39d98fca88"
+      }
     }
   }
 }
