@@ -87,7 +87,14 @@ export default function Search() {
         nextPageToken
       );
 
-      setVideos((prev) => [...prev, ...more.videos]);
+      setVideos((prev) => {
+        const existingIds = new Set(prev.map((v) => v.id));
+        const uniqueNew = more.videos.filter(
+          (v) => !existingIds.has(v.id)
+        );
+        return [...prev, ...uniqueNew];
+      });
+
       setNextPageToken(more.nextPageToken ?? null);
     } finally {
       setIsLoadingMore(false);
