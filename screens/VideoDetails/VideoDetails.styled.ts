@@ -16,12 +16,12 @@ export const VideoTitle = styled.Text`
     margin-bottom: 10px;
 `;
 
-export const ChanelWrapper = styled.View`
+export const ChannelWrapper = styled.View`
     flex-direction: row;
     justify-content: center;
 `;
 
-export const Circle = styled.View`
+export const IconCircle = styled.View`
     width: 48px;
     height: 48px;
     border-radius: 24px;
@@ -35,7 +35,7 @@ export const PersonIcon = styled(PersonSvg)`
     color: ${({ theme }) => theme.colors.secondary};
 `;
 
-export const ChanelName = styled.Text`
+export const ChannelName = styled.Text`
     color: ${({ theme }) => theme.colors.textPrimary};
     font-family: ${({ theme }) => theme.fonts.bold};
     font-size: ${({ theme }) => theme.fontSizes.md}px;
@@ -47,7 +47,7 @@ export const SwitchsWrapper = styled.View`
     margin-top: 16px;
 `;
 
-export const Switch = styled.View`
+export const SwitchButton = styled.View`
     flex: 1;
     align-items: center;
 `;
