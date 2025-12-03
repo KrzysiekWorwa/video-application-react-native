@@ -4,8 +4,8 @@ import PersonSvg from "../../assets/svg/icons/person-icon.svg";
 import ViewsSvg from "../../assets/svg/icons/views-icon.svg";
 
 export const InfoContaier = styled.ScrollView.attrs({
-  showsVerticalScrollIndicator: false,
-  contentContainerStyle: {
+    showsVerticalScrollIndicator: false,
+    contentContainerStyle: {
     paddingBottom: 40,
   },
 })`
