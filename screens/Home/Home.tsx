@@ -18,8 +18,11 @@ export default function Home() {
     <Container contentContainerStyle={{ paddingBottom: 35 }}>
       <SearchBarWrapper>
         <SearchBar
-          onPress={() => router.push("/search")}
           placeholder="Search videos"
+          value=""
+          onChangeText={() => { }}
+          navigateOnly={true}
+          onPress={() => router.push("/search")}
         />
         <SettingsIcon width={32} height={32} />
       </SearchBarWrapper>

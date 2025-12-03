@@ -2,7 +2,7 @@ import styled from "styled-components/native";
 
 import SearchSvg from "../../assets/svg/icons/search-icon.svg";
 
-export const Container = styled.View`
+export const Container = styled.TouchableOpacity`
     flex: 1;
     flex-direction: row;
     align-items: center;
