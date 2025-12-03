@@ -109,7 +109,7 @@ export const LikesIcon = styled(LikesSvg)`
 `;
 
 export const StatisticText = styled.Text`
-flex: 1;
+    flex: 1;
     color: ${({ theme }) => theme.colors.textSecondary};
     font-family: ${({ theme }) => theme.fonts.semiBold};
     font-size: ${({ theme }) => theme.fontSizes.xs}px;
