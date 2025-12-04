@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import { Dimensions, GestureResponderEvent, Pressable } from "react-native";
 import Video, { OnLoadData, OnProgressData } from "react-native-video";
 
-import { AirPlayIcon, ArrowIcon, BottomControls, CenterPlayButton, FullscreenButton, FullScreenIcon, HeaderGroup, IconButton, PlayerContainer, PlayerHeader, PlayerWrapper, PlayIcon, PlayIconButton, ProgressFill, ProgressTrack, TimeText, VolumeIcon } from "./VideoPlayer.styled";
+import { AirPlayIcon, ArrowIcon, BottomControls, CenterPlayButton, FullscreenButton, FullScreenIcon, HeaderGroup, IconButton, PlayerContainer, PlayerHeader, PlayerWrapper, PlayIcon, PlayIconButton, ProgressFill, ProgressThumb, ProgressTrack, TimeText, VolumeIcon } from "./VideoPlayer.styled";
 
 const { width } = Dimensions.get("window");
 const VIDEO_HEIGHT = width * 0.58;
@@ -111,16 +111,21 @@ export default function VideoPlayer() {
                     <TimeText>
                         {formatTime(currentTime)} / {formatTime(duration)}
                     </TimeText>
-                    <FullscreenButton onPress={openFullscreen}>
-                        <FullScreenIcon width={20} height={20} />
-                    </FullscreenButton>
+
                     <ProgressTrack
                         onLayout={handleSeekBarLayout}
                         onPress={handleSeekOnPress}
                         activeOpacity={1}
+                        hitSlop={{ top: 10, bottom: 10 }}
                     >
-                        <ProgressFill style={{ width: `${(progress || 0) * 100}%` }} />
+                        <ProgressFill style={{ width: `${(progress || 0) * 100}%` }} >
+                            <ProgressThumb />
+                        </ProgressFill>
                     </ProgressTrack>
+
+                    <FullscreenButton onPress={openFullscreen}>
+                        <FullScreenIcon width={20} height={20} />
+                    </FullscreenButton>
 
                 </BottomControls>
             </PlayerContainer>

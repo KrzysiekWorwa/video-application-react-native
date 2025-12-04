@@ -29,7 +29,7 @@ export default function RootLayout() {
   return (
     <SafeAreaProvider>
       <SafeAreaView
-        style={{ flex: 1, backgroundColor: theme.colors.surface }}
+        style={{ flex: 1, backgroundColor: "#000000" }}
         edges={["top"]}
       >
         <ThemeProvider theme={theme}>

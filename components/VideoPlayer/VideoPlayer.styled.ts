@@ -11,6 +11,7 @@ import VolumeSvg from "../../assets/svg/icons/volume-icon.svg";
 
 export const PlayerWrapper = styled.View`
   background-color: ${({ theme }) => theme.colors.background};
+  padding-bottom: 6px;
 `;
 
 export const PlayerContainer = styled.View`
@@ -84,7 +85,17 @@ export const ProgressTrack = styled.TouchableOpacity`
 
 export const ProgressFill = styled.View`
   height: 4px;
-  background-color: #C71F1F;
+  border-radius: 999px;
+  background-color: #c71f1f;
+  justify-content: center;
+  align-items: flex-end; 
+`;
+
+export const ProgressThumb = styled.View`
+  width: 12px;
+  height: 12px;
+  border-radius: 6px;
+  background-color: #c71f1f;
 `;
 
 export const TimeText = styled.Text`
@@ -92,6 +103,7 @@ export const TimeText = styled.Text`
   font-family: ${({ theme }) => theme.fonts.semiBold};
   font-size: ${({ theme }) => theme.fontSizes.xs}px;
   margin-left: 8px;
+  margin-bottom: 7px;
 `;
 
 export const FullscreenButton = styled.TouchableOpacity`
