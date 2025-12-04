@@ -1,8 +1,9 @@
 import VideoPlayer from "@/components/VideoPlayer/VideoPlater";
 import { useFetch } from "@/hooks/useFetch";
 import { getVideoDetails } from "@/services/api";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useLocalSearchParams } from "expo-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   AddNoteButton,
   AddNoteButtonText,
@@ -29,7 +30,7 @@ import {
   SwitchText,
   UnactiveSwitchLine,
   VideoTitle,
-  ViewsIcon,
+  ViewsIcon
 } from "./VideoDetails.styled";
 
 type ActiveTab = "details" | "notes";
@@ -39,6 +40,8 @@ type Note = {
   text: string;
   time: string;
 };
+
+const NOTES_STORAGE_KEY = (videoId: string) => `video_notes:${videoId}`;
 
 const formatTime = (seconds: number) => {
   const mins = Math.floor(seconds / 60);
@@ -54,10 +57,48 @@ export default function VideoDetails() {
   const [noteText, setNoteText] = useState("");
   const [currentTime, setCurrentTime] = useState(0);
 
+  useEffect(() => {
+    if (!id) return;
+
+    const loadNotes = async () => {
+      try {
+        const stored = await AsyncStorage.getItem(NOTES_STORAGE_KEY(id));
+        if (stored) {
+          const parsed: Note[] = JSON.parse(stored);
+          setNotes(parsed);
+        }
+      } catch (e) {
+        console.log("Failed to load notes", e);
+      }
+    };
+
+    loadNotes();
+  }, [id]);
+
+  const persistNotes = async (updatedNotes: Note[]) => {
+    if (!id) return;
+    try {
+      await AsyncStorage.setItem(
+        NOTES_STORAGE_KEY(id),
+        JSON.stringify(updatedNotes)
+      );
+    } catch (e) {
+      console.log("Failed to save notes", e);
+    }
+  };
+
   const { data: video, loading, error } = useFetch(
     () => getVideoDetails(id),
     [id]
   );
+
+  if (!id) {
+    return (
+      <InfoContaier>
+        <DescriptionTitle>Video not found</DescriptionTitle>
+      </InfoContaier>
+    );
+  }
 
   if (loading) {
     return (
@@ -85,7 +126,12 @@ export default function VideoDetails() {
       time: formatTime(currentTime),
     };
 
-    setNotes((prev) => [...prev, newNote]);
+    setNotes((prev) => {
+      const updated = [...prev, newNote];
+      persistNotes(updated);
+      return updated;
+    });
+
     setNoteText("");
   };
 
@@ -104,12 +150,18 @@ export default function VideoDetails() {
         </ChannelWrapper>
 
         <SwitchsWrapper>
-          <SwitchButton activeOpacity={0.8} onPress={() => setActiveTab("details")}>
+          <SwitchButton
+            activeOpacity={0.8}
+            onPress={() => setActiveTab("details")}
+          >
             <SwitchText>Details</SwitchText>
             {activeTab === "details" ? <SwitchLine /> : <UnactiveSwitchLine />}
           </SwitchButton>
 
-          <SwitchButton activeOpacity={0.8} onPress={() => setActiveTab("notes")}>
+          <SwitchButton
+            activeOpacity={0.8}
+            onPress={() => setActiveTab("notes")}
+          >
             <SwitchText>Notes</SwitchText>
             {activeTab === "notes" ? <SwitchLine /> : <UnactiveSwitchLine />}
           </SwitchButton>

@@ -137,7 +137,7 @@ export const NoteCard = styled.View`
     border-radius: 12px;
     border-width: 1px;
     border-color: #c8c8c8;
-    padding: 12px 12px;
+     padding: 12px 12px 0;
     background-color: ${({ theme }) => theme.colors.background};
     margin-top: 10px;
 `;
