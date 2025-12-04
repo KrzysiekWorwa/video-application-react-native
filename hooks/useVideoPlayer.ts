@@ -2,7 +2,11 @@ import { useRouter } from "expo-router";
 import * as ScreenOrientation from "expo-screen-orientation";
 import { useEffect, useRef, useState } from "react";
 import { Dimensions, GestureResponderEvent } from "react-native";
-import { OnLoadData, OnProgressData } from "react-native-video";
+import {
+    OnLoadData,
+    OnProgressData,
+    TextTrackType
+} from "react-native-video";
 
 const { width } = Dimensions.get("window");
 const VIDEO_HEIGHT = width * 0.58;
@@ -10,6 +14,9 @@ const VIDEO_HEIGHT = width * 0.58;
 const VIDEO_SOURCE = {
     uri: "https://bitmovin-a.akamaihd.net/content/sintel/hls/playlist.m3u8",
 };
+
+const SUBTITLES_SOURCE =
+    "https://bitmovin-a.akamaihd.net/content/sintel/subtitles/subtitles_en.vtt";
 
 const SEEK_INTERVAL = 10;
 
@@ -30,6 +37,8 @@ export function useVideoPlayer() {
     const [barWidth, setBarWidth] = useState(0);
     const [isMuted, setIsMuted] = useState(false);
     const [isFullscreen, setIsFullscreen] = useState(false);
+
+    const [isSubtitlesOn, setIsSubtitlesOn] = useState(true);
 
     const progress = duration ? currentTime / duration : 0;
 
@@ -142,6 +151,23 @@ export function useVideoPlayer() {
 
     const timeLabel = `${formatTime(currentTime)} / ${formatTime(duration)}`;
 
+    const textTracks = [
+        {
+            title: "English",
+            language: "en",
+            type: TextTrackType.VTT,
+            uri: SUBTITLES_SOURCE,
+        },
+    ];
+
+    const selectedTextTrack = isSubtitlesOn
+        ? ({ type: "language", value: "en" } as const)
+        : ({ type: "disabled", value: "" } as const);
+
+    const toggleSubtitles = () => {
+        setIsSubtitlesOn((prev) => !prev);
+    };
+
     return {
         videoRef,
         VIDEO_SOURCE,
@@ -151,10 +177,11 @@ export function useVideoPlayer() {
         isFullscreen,
         progress,
         timeLabel,
-
+        isSubtitlesOn,
         wrapperStyle,
         containerStyle,
-
+        textTracks,
+        selectedTextTrack,
         handleLoad,
         handleProgress,
         handleSeekBarLayout,
@@ -165,5 +192,6 @@ export function useVideoPlayer() {
         handleSkipBackward,
         handleSkipForward,
         toggleFullscreen,
+        toggleSubtitles,
     };
 }

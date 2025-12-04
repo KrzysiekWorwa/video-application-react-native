@@ -7,6 +7,7 @@ import FullScreenSvg from "../../assets/svg/icons/fullscreen-icon.svg";
 import ArrowSvg from "../../assets/svg/icons/leftarrow-icon.svg";
 import PauseSvg from "../../assets/svg/icons/pause-icon.svg";
 import PlaySvg from "../../assets/svg/icons/play-icon.svg";
+import SubtitlesSvg from "../../assets/svg/icons/subtitles-icon.svg";
 import VolumeSvg from "../../assets/svg/icons/volume-icon.svg";
 
 export const PlayerWrapper = styled.View`
@@ -148,6 +149,10 @@ export const VolumeIcon = styled(VolumeSvg)`
 `;
 
 export const AirPlayIcon = styled(AirPlaySvg)`
+    color: ${({ theme }) => theme.colors.textSecondary};
+`;
+
+export const SubtitlesIcon = styled(SubtitlesSvg)`
     color: ${({ theme }) => theme.colors.textSecondary};
 `;
 

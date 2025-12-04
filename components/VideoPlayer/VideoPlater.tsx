@@ -23,6 +23,7 @@ import {
     ProgressFill,
     ProgressThumb,
     ProgressTrack,
+    SubtitlesIcon,
     TimeText,
     VolumeIcon,
 } from "./VideoPlayer.styled";
@@ -38,6 +39,9 @@ export default function VideoPlayer() {
         timeLabel,
         wrapperStyle,
         containerStyle,
+        textTracks,
+        selectedTextTrack,
+        isSubtitlesOn,
         handleLoad,
         handleProgress,
         handleSeekBarLayout,
@@ -48,6 +52,7 @@ export default function VideoPlayer() {
         handleSkipBackward,
         handleSkipForward,
         toggleFullscreen,
+        toggleSubtitles,
     } = useVideoPlayer();
 
     return (
@@ -65,6 +70,11 @@ export default function VideoPlayer() {
                     onProgress={handleProgress}
                     onError={(e) => console.log("VIDEO ERROR", e)}
                     muted={isMuted}
+                    textTracks={textTracks}
+                    selectedTextTrack={selectedTextTrack}
+                    subtitleStyle={{
+                        paddingBottom: isFullscreen ? 80 : 40,
+                    }}
                 />
 
                 {!isPlaying && <PauseOverlay />}
@@ -90,7 +100,10 @@ export default function VideoPlayer() {
                     </HeaderGroup>
 
                     <HeaderGroup>
-                        <IconButton onPress={toggleMute}>
+                        <IconButton onPress={toggleSubtitles} style={{ opacity: isSubtitlesOn ? 0.4 : 1 }}>
+                            <SubtitlesIcon width={20} height={20} />
+                        </IconButton>
+                        <IconButton onPress={toggleMute} style={{ opacity: isMuted ? 0.4 : 1 }}>
                             <VolumeIcon width={20} height={20} />
                         </IconButton>
                         <IconButton>
