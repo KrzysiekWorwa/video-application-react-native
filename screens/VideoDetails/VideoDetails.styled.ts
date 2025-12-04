@@ -6,8 +6,8 @@ import ViewsSvg from "../../assets/svg/icons/views-icon.svg";
 export const InfoContaier = styled.ScrollView.attrs({
     showsVerticalScrollIndicator: false,
     contentContainerStyle: {
-    paddingBottom: 40,
-  },
+        paddingBottom: 40,
+    },
 })`
     flex: 1;
     padding: 20px 24px;
@@ -53,7 +53,7 @@ export const SwitchsWrapper = styled.View`
     margin-top: 16px;
 `;
 
-export const SwitchButton = styled.View`
+export const SwitchButton = styled.TouchableOpacity`
     flex: 1;
     align-items: center;
 `;
