@@ -29,6 +29,7 @@ export default function VideoPlayer() {
     const [duration, setDuration] = useState(0);
     const [currentTime, setCurrentTime] = useState(0);
     const [barWidth, setBarWidth] = useState(0);
+    const [isMuted, setIsMuted] = useState(false);
 
     const progress = duration ? currentTime / duration : 0;
 
@@ -61,6 +62,10 @@ export default function VideoPlayer() {
         setCurrentTime(newTime);
     };
 
+    const toggleMute = () => {
+        setIsMuted((prev) => !prev);
+    };
+
     return (
         <PlayerWrapper>
             <PlayerContainer style={{ height: VIDEO_HEIGHT }}>
@@ -73,6 +78,7 @@ export default function VideoPlayer() {
                     onLoad={handleLoad}
                     onProgress={handleProgress}
                     onError={(e) => console.log("VIDEO ERROR", e)}
+                    muted={isMuted}
                 />
 
                 <Pressable
@@ -90,7 +96,7 @@ export default function VideoPlayer() {
                     </HeaderGroup>
 
                     <HeaderGroup>
-                        <IconButton>
+                        <IconButton onPress={toggleMute}>
                             <VolumeIcon width={20} height={20} />
                         </IconButton>
                         <IconButton>
