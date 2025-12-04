@@ -162,6 +162,7 @@ export const NoteInput = styled.TextInput.attrs({
     multiline: true,
     textAlignVertical: "top" as const,
     placeholderTextColor: "#C8C8C8",
+    underlineColorAndroid: "transparent",
 })`
     margin-top: 24px;
     border-radius: 12px;
@@ -172,6 +173,11 @@ export const NoteInput = styled.TextInput.attrs({
     color: ${({ theme }) => theme.colors.textPrimary};
     font-family: ${({ theme }) => theme.fonts.regular};
     font-size: ${({ theme }) => theme.fontSizes.sm}px;
+    background-color: ${({ theme }) => theme.colors.background};
+`;
+
+export const ButtonWrapper = styled.View`
+    align-items: center;
 `;
 
 export const AddNoteButton = styled.TouchableOpacity`
@@ -179,9 +185,10 @@ export const AddNoteButton = styled.TouchableOpacity`
     margin-bottom: 8px;
     border-radius: 8px;
     background-color: ${({ theme }) => theme.colors.primary};
-    padding: 0 14px;
+    padding: 10px 0;
     align-items: center;
     justify-content: center;
+    width: 256px;
 `;
 
 export const AddNoteButtonText = styled.Text`
