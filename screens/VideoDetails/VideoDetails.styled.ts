@@ -127,3 +127,66 @@ export const StatisticText = styled.Text`
     letter-spacing: 0.1px;
     text-align: center;
 `;
+
+export const NotesList = styled.View`
+    margin-top: 16px;
+    gap: 12px;
+`;
+
+export const NoteCard = styled.View`
+    border-radius: 12px;
+    border-width: 1px;
+    border-color: #c8c8c8;
+    padding: 12px 12px;
+    background-color: ${({ theme }) => theme.colors.background};
+`;
+
+export const NoteText = styled.Text`
+    color: ${({ theme }) => theme.colors.textPrimary};
+    font-family: ${({ theme }) => theme.fonts.regular};
+    font-size: ${({ theme }) => theme.fontSizes.sm}px;
+    line-height: ${({ theme }) => theme.lineHeight.s}px;
+    letter-spacing: 0.12px;
+`;
+
+export const NoteTime = styled.Text`
+    color: ${({ theme }) => theme.colors.textPrimary};
+    font-family: ${({ theme }) => theme.fonts.semiBold};
+    font-size: ${({ theme }) => theme.fontSizes.xs}px;
+    letter-spacing: 0.1px;
+    text-align: right;
+    margin-top: 8px;
+`;
+
+export const NoteInput = styled.TextInput.attrs({
+    multiline: true,
+    textAlignVertical: "top" as const,
+    placeholderTextColor: "#C8C8C8",
+})`
+    margin-top: 24px;
+    border-radius: 12px;
+    border-width: 1px;
+    border-color: #c8c8c8;
+    padding: 12px 12px;
+    min-height: 60px;
+    color: ${({ theme }) => theme.colors.textPrimary};
+    font-family: ${({ theme }) => theme.fonts.regular};
+    font-size: ${({ theme }) => theme.fontSizes.sm}px;
+`;
+
+export const AddNoteButton = styled.TouchableOpacity`
+    margin-top: 16px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    background-color: ${({ theme }) => theme.colors.primary};
+    padding: 0 14px;
+    align-items: center;
+    justify-content: center;
+`;
+
+export const AddNoteButtonText = styled.Text`
+    color: ${({ theme }) => theme.colors.secondary};
+    font-family: ${({ theme }) => theme.fonts.semiBold};
+    font-size: ${({ theme }) => theme.fontSizes.md}px;
+    letter-spacing: 0.14px;
+`;
