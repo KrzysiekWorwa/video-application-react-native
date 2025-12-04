@@ -19,7 +19,7 @@ export default function CategorySection({ title, query }: Props) {
     const router = useRouter();
 
     const { data, loading } = useFetch<YoutubeSearchResult>(
-        () => searchVideos(query, 10, "latest"),
+        () => searchVideos(query, 10, "popular"),
         []
     );
 

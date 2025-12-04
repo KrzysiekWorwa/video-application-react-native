@@ -1,4 +1,4 @@
-import VideoPlayer from "@/components/VideoPlayer/VideoPlater";
+import VideoPlayer from "@/components/VideoPlayer/VideoPlayer";
 import { useFetch } from "@/hooks/useFetch";
 import { getVideoDetails } from "@/services/api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
