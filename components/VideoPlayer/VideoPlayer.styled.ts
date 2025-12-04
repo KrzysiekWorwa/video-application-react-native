@@ -45,6 +45,13 @@ export const IconButton = styled.TouchableOpacity`
   align-items: center;
 `;
 
+export const CentralGroup = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 64px;
+  align-items: center;
+`;
+
 export const CenterPlayButton = styled.TouchableOpacity`
   position: absolute;
   top: 0;

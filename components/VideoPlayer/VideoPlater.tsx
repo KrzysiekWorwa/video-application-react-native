@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import { Dimensions, GestureResponderEvent, Pressable } from "react-native";
 import Video, { OnLoadData, OnProgressData } from "react-native-video";
 
-import { AirPlayIcon, ArrowIcon, BottomControls, CenterPlayButton, FullscreenButton, FullScreenIcon, HeaderGroup, IconButton, PlayerContainer, PlayerHeader, PlayerWrapper, PlayIcon, PlayIconButton, ProgressFill, ProgressThumb, ProgressTrack, TimeText, VolumeIcon } from "./VideoPlayer.styled";
+import { AirPlayIcon, ArrowIcon, BackIcon, BottomControls, CenterPlayButton, CentralGroup, ForwardIcon, FullscreenButton, FullScreenIcon, HeaderGroup, IconButton, PlayerContainer, PlayerHeader, PlayerWrapper, PlayIcon, PlayIconButton, ProgressFill, ProgressThumb, ProgressTrack, TimeText, VolumeIcon } from "./VideoPlayer.styled";
 
 const { width } = Dimensions.get("window");
 const VIDEO_HEIGHT = width * 0.58;
@@ -66,6 +66,24 @@ export default function VideoPlayer() {
         setIsMuted((prev) => !prev);
     };
 
+    const SEEK_INTERVAL = 10;
+
+    const handleSkipBackward = () => {
+        if (!videoRef.current) return;
+
+        const newTime = Math.max(currentTime - SEEK_INTERVAL, 0);
+        videoRef.current.seek(newTime);
+        setCurrentTime(newTime);
+    };
+
+    const handleSkipForward = () => {
+        if (!videoRef.current || !duration) return;
+
+        const newTime = Math.min(currentTime + SEEK_INTERVAL, duration);
+        videoRef.current.seek(newTime);
+        setCurrentTime(newTime);
+    };
+
     return (
         <PlayerWrapper>
             <PlayerContainer style={{ height: VIDEO_HEIGHT }}>
@@ -107,9 +125,17 @@ export default function VideoPlayer() {
 
                 {!isPlaying && (
                     <CenterPlayButton onPress={togglePlay}>
-                        <PlayIconButton onPress={togglePlay}>
-                            <PlayIcon width={24} height={24} />
-                        </PlayIconButton>
+                        <CentralGroup>
+                            <IconButton onPress={handleSkipBackward}>
+                                <BackIcon width={20} height={20} />
+                            </IconButton>
+                            <PlayIconButton onPress={togglePlay}>
+                                <PlayIcon width={24} height={24} />
+                            </PlayIconButton>
+                            <IconButton onPress={handleSkipForward}>
+                                <ForwardIcon width={20} height={20} />
+                            </IconButton>
+                        </CentralGroup>
                     </CenterPlayButton>
                 )}
 
