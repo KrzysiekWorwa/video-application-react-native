@@ -1,13 +1,13 @@
 import { useFetch } from "@/hooks/useFetch";
 import { searchVideos, YoutubeSearchResult, YoutubeVideo } from "@/services/api";
 import { useRouter } from "expo-router";
-import { FlatList, Image } from "react-native";
+import { FlatList } from "react-native";
 import {
     Card,
     Container, Header,
     PublishDate,
     Separator,
-    ShowMoreText, TextWrapper, VideoTitle
+    ShowMoreText, TextWrapper, Thumbnail, VideoTitle
 } from "./CategorySection.styled";
 
 type Props = {
@@ -41,15 +41,7 @@ export default function CategorySection({ title, query }: Props) {
 
         return (
             <Card activeOpacity={0.8} onPress={() => handlePressVideo(item)}>
-                <Image
-                    source={{ uri: item.thumbnail }}
-                    style={{
-                        width: 180,
-                        height: 112,
-                        borderRadius: 12,
-                        backgroundColor: "#000",
-                    }}
-                />
+                <Thumbnail source={{ uri: item.thumbnail }} />
                 <VideoTitle numberOfLines={2}>{item.title}</VideoTitle>
                 <PublishDate>{date}</PublishDate>
             </Card>
@@ -74,6 +66,10 @@ export default function CategorySection({ title, query }: Props) {
                     renderItem={renderItem}
                     style={{ marginRight: -24 }}
                 />
+            )}
+
+            {!loading && videos.length === 0 && (
+                <Header>No videos found</Header>
             )}
 
             <Separator />

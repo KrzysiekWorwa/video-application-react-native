@@ -61,3 +61,10 @@ export const Separator = styled.View`
     margin-left: -24px; 
     margin-right: -24px;
 `;
+
+export const Thumbnail = styled.Image`
+  width: 180px;
+  height: 112px;
+  border-radius: 12px;
+  background-color: #000;
+`;
