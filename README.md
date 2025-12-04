@@ -112,7 +112,8 @@ You can:
 
 ## 🛠️ Installation & Running
 
-> ⚠️ **Expo Go will NOT work — the app uses native modules.**
+> ⚠️ **Expo Go will NOT work — the app uses native modules.**  
+> ⚠️ **During development the app requires the Expo dev server to be running.**
 
 ## 1️⃣ Clone the project
 
@@ -140,15 +141,33 @@ yarn install
 
 This generates native iOS & Android projects required for dev-client.
 
-## 5️⃣ Run the app
+## 5️⃣ Start Expo dev server (required in development)
 
- Android:
+  npx expo start --dev-client
 
- npx expo run:android
+This command starts the Expo dev server, which the native app connects to during development.
 
- iOS:
+## 6️⃣ Run the app on device/emulator
 
- npx expo run:ios
+Android:
+
+  npx expo run:android
+
+iOS:
+
+  npx expo run:ios
+
+## 📦 Production Build (without Expo dev server)
+
+To run the app without Expo dev server (e.g. on testers’ devices or in store), you need a release/production build.
+
+Android:
+
+eas build --platform android --profile production
+
+iOS:
+
+eas build --platform ios --profile production
 
 ## 👤 Author
 
