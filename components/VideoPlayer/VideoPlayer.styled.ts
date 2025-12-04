@@ -150,3 +150,12 @@ export const VolumeIcon = styled(VolumeSvg)`
 export const AirPlayIcon = styled(AirPlaySvg)`
     color: ${({ theme }) => theme.colors.textSecondary};
 `;
+
+export const PauseOverlay = styled.View`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.2);
+`;

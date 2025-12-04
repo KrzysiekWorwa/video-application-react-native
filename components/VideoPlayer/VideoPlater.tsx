@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import { Dimensions, GestureResponderEvent, Pressable } from "react-native";
 import Video, { OnLoadData, OnProgressData } from "react-native-video";
 
-import { AirPlayIcon, ArrowIcon, BackIcon, BottomControls, CenterPlayButton, CentralGroup, ForwardIcon, FullscreenButton, FullScreenIcon, HeaderGroup, IconButton, PlayerContainer, PlayerHeader, PlayerWrapper, PlayIcon, PlayIconButton, ProgressFill, ProgressThumb, ProgressTrack, TimeText, VolumeIcon } from "./VideoPlayer.styled";
+import { AirPlayIcon, ArrowIcon, BackIcon, BottomControls, CenterPlayButton, CentralGroup, ForwardIcon, FullscreenButton, FullScreenIcon, HeaderGroup, IconButton, PauseOverlay, PlayerContainer, PlayerHeader, PlayerWrapper, PlayIcon, PlayIconButton, ProgressFill, ProgressThumb, ProgressTrack, TimeText, VolumeIcon } from "./VideoPlayer.styled";
 
 const { width } = Dimensions.get("window");
 const VIDEO_HEIGHT = width * 0.58;
@@ -98,7 +98,7 @@ export default function VideoPlayer() {
                     onError={(e) => console.log("VIDEO ERROR", e)}
                     muted={isMuted}
                 />
-
+                {!isPlaying && <PauseOverlay />}
                 <Pressable
                     style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }}
                     onPress={togglePlay}
@@ -148,7 +148,7 @@ export default function VideoPlayer() {
                         onLayout={handleSeekBarLayout}
                         onPress={handleSeekOnPress}
                         activeOpacity={1}
-                        hitSlop={{ top: 10, bottom: 10 }}
+                        hitSlop={{ top: 15, bottom: 15 }}
                     >
                         <ProgressFill style={{ width: `${(progress || 0) * 100}%` }} >
                             <ProgressThumb />
