@@ -1,10 +1,10 @@
+import SearchBar from "@/components/SearchBar/SearchBar";
 import { SearchSection } from "@/components/SearchSection/SearchSection";
 import { SortCard } from "@/components/SortCard/SortCard";
 import { useSearchScreen } from "@/hooks/useSearchScreen";
 import { YoutubeVideo } from "@/services/api";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { ActivityIndicator, FlatList, TouchableOpacity } from "react-native";
-import SearchBar from "../../components/SearchBar/SearchBar";
 import {
   Container,
   ResultsNumber,
@@ -88,6 +88,10 @@ export default function Search() {
             ) : null
           }
         />
+      )}
+
+      {!loading && videos.length === 0 && hasQuery && (
+        <ResultsNumber>No results found.</ResultsNumber>
       )}
 
       <SortCard
