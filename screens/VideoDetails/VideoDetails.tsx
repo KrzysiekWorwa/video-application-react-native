@@ -1,8 +1,8 @@
+import VideoPlayer from "@/components/VideoPlayer/VideoPlater";
 import { useFetch } from "@/hooks/useFetch";
 import { getVideoDetails } from "@/services/api";
 import { useLocalSearchParams } from "expo-router";
 import { Dimensions } from "react-native";
-import Video from "react-native-video";
 import { ChannelName, ChannelWrapper, Description, DescriptionTitle, IconCircle, InfoContaier, LikesIcon, PersonIcon, StatisticBox, StatisticText, StatisticWrapper, SwitchButton, SwitchLine, SwitchsWrapper, SwitchText, UnactiveSwitchLine, VideoTitle, ViewsIcon } from "./VideoDetails.styled";
 
 const { width } = Dimensions.get("window");
@@ -35,18 +35,7 @@ export default function VideoDetails() {
 
     return (
         <>
-            <Video
-                source={{ uri: "https://bitmovin-a.akamaihd.net/content/sintel/hls/playlist.m3u8" }}
-                style={{
-                    width: "100%",
-                    height: VIDEO_HEIGHT,
-                    backgroundColor: "#000",
-                }}
-                resizeMode="contain"
-                controls={true}
-                paused={false}
-                onError={(e) => console.log("VIDEO ERROR:", e)}
-            />
+            <VideoPlayer />
             <InfoContaier>
                 <VideoTitle numberOfLines={2}>
                     {video.title}

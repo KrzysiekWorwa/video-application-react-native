@@ -1,12 +1,12 @@
 import { useRouter } from "expo-router";
 import { useRef, useState } from "react";
-import { Dimensions, GestureResponderEvent, TouchableWithoutFeedback } from "react-native";
+import { Dimensions, GestureResponderEvent, Pressable } from "react-native";
 import Video, { OnLoadData, OnProgressData } from "react-native-video";
 
-import { AirPlayIcon, BackIcon, BottomControls, CenterPlayButton, FullscreenButton, FullScreenIcon, HeaderGroup, HeaderIconButton, PlayerContainer, PlayerHeader, PlayerWrapper, PlayIcon, ProgressFill, ProgressRow, ProgressTrack, TimeText, VolumeIcon } from "./VideoPlayer.styled";
+import { AirPlayIcon, ArrowIcon, BottomControls, CenterPlayButton, FullscreenButton, FullScreenIcon, HeaderGroup, IconButton, PlayerContainer, PlayerHeader, PlayerWrapper, PlayIcon, PlayIconButton, ProgressFill, ProgressTrack, TimeText, VolumeIcon } from "./VideoPlayer.styled";
 
 const { width } = Dimensions.get("window");
-const VIDEO_HEIGHT = width * 0.56;
+const VIDEO_HEIGHT = width * 0.58;
 
 const VIDEO_SOURCE = {
     uri: "https://bitmovin-a.akamaihd.net/content/sintel/hls/playlist.m3u8",
@@ -64,48 +64,56 @@ export default function VideoPlayer() {
     return (
         <PlayerWrapper>
             <PlayerContainer style={{ height: VIDEO_HEIGHT }}>
-                <TouchableWithoutFeedback onPress={togglePlay}>
-                    <Video
-                        ref={(ref) => (videoRef.current = ref)}
-                        source={VIDEO_SOURCE}
-                        style={{ width: "100%", height: "100%" }}
-                        resizeMode="cover"
-                        paused={!isPlaying}
-                        onLoad={handleLoad}
-                        onProgress={handleProgress}
-                        onError={(e) => console.log("VIDEO ERROR", e)}
-                    />
-                </TouchableWithoutFeedback>
+                <Video
+                    ref={(ref) => (videoRef.current = ref)}
+                    source={VIDEO_SOURCE}
+                    style={{ width: "100%", height: "100%" }}
+                    resizeMode="cover"
+                    paused={!isPlaying}
+                    onLoad={handleLoad}
+                    onProgress={handleProgress}
+                    onError={(e) => console.log("VIDEO ERROR", e)}
+                />
+
+                <Pressable
+                    style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }}
+                    onPress={togglePlay}
+                >
+                    <></>
+                </Pressable>
 
                 <PlayerHeader>
                     <HeaderGroup>
-                        <HeaderIconButton onPress={() => router.back()}>
-                            <BackIcon width={20} height={20} />
-                        </HeaderIconButton>
+                        <IconButton onPress={() => router.back()}>
+                            <ArrowIcon width={20} height={20} />
+                        </IconButton>
                     </HeaderGroup>
 
                     <HeaderGroup>
-                        <HeaderIconButton>
+                        <IconButton>
                             <VolumeIcon width={20} height={20} />
-                        </HeaderIconButton>
-                    </HeaderGroup>
-
-                    <HeaderGroup>
-                        <HeaderIconButton>
+                        </IconButton>
+                        <IconButton>
                             <AirPlayIcon width={20} height={20} />
-                        </HeaderIconButton>
+                        </IconButton>
                     </HeaderGroup>
                 </PlayerHeader>
 
                 {!isPlaying && (
                     <CenterPlayButton onPress={togglePlay}>
-                        <PlayIcon width={24} height={24} />
+                        <PlayIconButton onPress={togglePlay}>
+                            <PlayIcon width={24} height={24} />
+                        </PlayIconButton>
                     </CenterPlayButton>
                 )}
-            </PlayerContainer>
 
-            <BottomControls>
-                <ProgressRow>
+                <BottomControls>
+                    <TimeText>
+                        {formatTime(currentTime)} / {formatTime(duration)}
+                    </TimeText>
+                    <FullscreenButton onPress={openFullscreen}>
+                        <FullScreenIcon width={20} height={20} />
+                    </FullscreenButton>
                     <ProgressTrack
                         onLayout={handleSeekBarLayout}
                         onPress={handleSeekOnPress}
@@ -114,15 +122,10 @@ export default function VideoPlayer() {
                         <ProgressFill style={{ width: `${(progress || 0) * 100}%` }} />
                     </ProgressTrack>
 
-                    <TimeText>
-                        {formatTime(currentTime)} / {formatTime(duration)}
-                    </TimeText>
+                </BottomControls>
+            </PlayerContainer>
 
-                    <FullscreenButton onPress={openFullscreen}>
-                        <FullScreenIcon width={20} height={20} />
-                    </FullscreenButton>
-                </ProgressRow>
-            </BottomControls>
+
         </PlayerWrapper>
     );
 }

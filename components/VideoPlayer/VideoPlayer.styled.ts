@@ -32,9 +32,10 @@ export const PlayerHeader = styled.View`
 export const HeaderGroup = styled.View`
   flex-direction: row;
   align-items: center;
+  gap: 8px;
 `;
 
-export const HeaderIconButton = styled.TouchableOpacity`
+export const IconButton = styled.TouchableOpacity`
   width: 32px;
   height: 32px;
   border-radius: 16px;
@@ -53,38 +54,51 @@ export const CenterPlayButton = styled.TouchableOpacity`
   align-items: center;
 `;
 
-export const BottomControls = styled.View`
-  padding: 6px 24px 0;
-  background-color: ${({ theme }) => theme.colors.background};
+export const PlayIconButton = styled.TouchableOpacity`
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  background-color: rgba(0, 0, 0, 0.55);
+  justify-content: center;
+  align-items: center;
 `;
 
-export const ProgressRow = styled.View`
+export const BottomControls = styled.View`
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+`;
+
+export const BottomRow = styled.View`
   flex-direction: row;
+  justify-content: space-between;
   align-items: center;
 `;
 
 export const ProgressTrack = styled.TouchableOpacity`
   flex: 1;
-  height: 18px;
-  justify-content: center;
-  margin-right: 8px;
+  height: 4px;
+  background-color: #C8C8C8;
 `;
 
 export const ProgressFill = styled.View`
   height: 4px;
-  border-radius: 999px;
-  background-color: ${({ theme }) => theme.colors.primary};
+  background-color: #C71F1F;
 `;
 
 export const TimeText = styled.Text`
-  color: ${({ theme }) => theme.colors.textPrimary};
+  color: ${({ theme }) => theme.colors.textSecondary};
   font-family: ${({ theme }) => theme.fonts.semiBold};
   font-size: ${({ theme }) => theme.fontSizes.xs}px;
-  margin-right: 8px;
+  margin-left: 8px;
 `;
 
 export const FullscreenButton = styled.TouchableOpacity`
-  padding: 4px;
+  position: absolute;
+  right: 9px;
+  bottom: 16px;
+  z-index: 20;
 `;
 
 export const ArrowIcon = styled(ArrowSvg)`
