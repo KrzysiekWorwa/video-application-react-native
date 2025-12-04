@@ -1,214 +1,157 @@
-Video Learning App — React Native (Expo)
+# 📱 Video Learning App — React Native (Expo)
 
-A mobile learning application built as part of a recruitment assignment.
+A mobile learning application built as part of a recruitment assignment.  
 The app serves as a knowledge hub for developers, allowing users to browse categorized videos, search content using the YouTube API, watch videos in a custom video player, and create timestamped notes stored locally on the device.
 
-🚀 Tech Stack
-Core
+---
 
-React Native — mobile framework
+## Tech Stack
 
-Expo — build system & native tooling
+### **Core**
+- **React Native** — mobile framework  
+- **Expo** — build system & native tooling  
+- **Expo Router** — file-based navigation  
+- **TypeScript** — static typing  
+- **Styled Components** — UI styling  
 
-Expo Router — file-based navigation
+### **Native Modules**
+- **react-native-video** — custom video player  
+- **@react-native-async-storage/async-storage** — local notes storage  
+- **react-native-svg** + transformer — SVG icons  
+- **expo-screen-orientation** — fullscreen rotation lock  
+- **expo-font** — custom fonts (Poppins)
 
-TypeScript — static typing
+### **API**
+- **YouTube Data API v3**  
+  - search videos  
+  - fetch metadata  
+  - fetch statistics  
+- `.env` support via Expo public variables
 
-Styled Components — UI styling
+### **Custom Hooks**
+- `useVideoPlayer` — player logic (progress, fullscreen, gestures, subtitles)
+- `useSearchScreen` — search logic, sorting, pagination  
+- `useFetch` — reusable API loader  
+- `useDebounce` — input debouncing  
 
-Native Modules
+## Implemented Features
 
-react-native-video — custom video player
+### ✔️ 1. Main Screen (Required)
 
-@react-native-async-storage/async-storage — local notes storage
+- Four categories:
+  - React Native  
+  - React  
+  - TypeScript  
+  - JavaScript
+- Horizontal carousels for each category  
+- “Show More” → navigates to Search screen and showing more videos 
+- Search bar → navigates to Search screen
 
-react-native-svg + transformer — SVG icons
+---
 
-expo-screen-orientation — fullscreen rotation lock
+### ✔️ 2. Search Screen (Required)
 
-expo-font — custom fonts (Poppins)
+#### Features:
+- YouTube API search with debounced input  
+- Infinite scrolling  
+- Displays:
+  - thumbnail  
+  - title  
+  - channel name  
+  - publish date  
+  - number of found results
+- Sorting:
+  - **Most popular**  
+  - **Upload date — latest**  
+  - **Upload date — oldest**
 
-API
+---
 
-YouTube Data API v3
-
-search videos
-
-fetch metadata
-
-fetch statistics
-
-.env support via Expo public variables
-
-Custom Hooks
-
-useVideoPlayer — player logic (progress, fullscreen, gestures, subtitles)
-
-useSearchScreen — search logic, sorting, pagination
-
-useFetch — reusable API loader
-
-useDebounce — input debouncing
-
-📁 Project Structure
-src/
- ├── app/               # Routing (Expo Router)
- ├── components/        # Reusable UI components
- ├── hooks/             # Custom hooks
- ├── services/          # API communication (YouTube API)
- ├── screens/           # App screens (Home, Search, VideoDetails)
- ├── theme/             # Styled Components theme
- └── assets/            # Fonts, icons, images
-
-🎥 Implemented Features
-✔️ 1. Main Screen (Required)
-
-Four categories:
-
-React Native
-
-React
-
-TypeScript
-
-JavaScript
-
-Horizontal carousels for each category
-
-“Show More” → navigates to Search screen
-
-Search bar → navigates to Search screen
-
-✔️ 2. Search Screen (Required)
-Features:
-
-YouTube API search with debounced input
-
-Infinite scrolling (20 videos per page)
+### ✔️ 3. Video Details Screen (Required)
 
 Displays:
+- Video title  
+- Channel  
+- Description  
+- Views & Likes  
 
-thumbnail
-
-title
-
-channel name
-
-publish date
-
-Sorting:
-
-Most popular
-
-Upload date — latest
-
-Upload date — oldest
-
-✔️ 3. Video Details Screen (Required)
-
-Displays:
-
-Video title
-
-Channel
-
-Description
-
-Views & Likes
-
-🎬 Custom Video Player (react-native-video)
+#### 🎬 Custom Video Player (react-native-video)
 
 Supports:
+- Play / pause  
+- 10s forward / backward skip  
+- Mute / unmute  
+- Progress bar with draggable thumb  
+- Subtitles toggle  
+- Fullscreen mode with orientation lock  
+- Minimized mode in details view  
 
-Play / pause
-
-10s forward / backward skip
-
-Mute / unmute
-
-Progress bar with draggable thumb
-
-Subtitles toggle
-
-Fullscreen mode with orientation lock
-
-Minimized mode in details view
-
-Subtitles file used:
-
+**Subtitles file:**
 https://bitmovin-a.akamaihd.net/content/sintel/subtitles/subtitles_en.vtt
 
-
-Video stream source:
-
+**Video stream source:**
 https://bitmovin-a.akamaihd.net/content/sintel/hls/playlist.m3u8
 
-✔️ 4. Local Notes System (Optional)
+---
 
-Each video has a Notes tab.
+### ✔️ 4. Local Notes System (Optional)
 
-Users can:
+Each video has a **Notes** tab.
 
-write notes during playback
+You can:
+- write notes during playback  
+- automatically capture video timestamp (MM:SS)  
+- store notes locally using AsyncStorage  
+- restore notes when revisiting the video  
 
-automatically capture timestamp (MM:SS)
+## 🚧 Not Implemented (Time Constraints)
 
-store notes locally using AsyncStorage
+- Daily push notifications with scheduling
 
-restore notes when returning to a video
+---
 
-Storage key pattern:
+## 🛠️ Installation & Running
 
-video_notes:<videoId>
+> ⚠️ **Expo Go will NOT work — the app uses native modules.**
 
+## 1️⃣ Clone the project
 
-Data format:
+git clone [https://github.com/KrzysiekWorwa/video-application-react-native.git](https://github.com/KrzysiekWorwa/video-application-react-native.git)
 
-{
-  "id": "string",
-  "text": "string",
-  "time": "MM:SS"
-}
+ cd video-application-react-native
 
-❌ Not Implemented (Time Constraints)
+## 2️⃣ Install dependencies
 
-Daily push notifications with scheduling
+ npm install
 
-🛠️ Installation & Running
+ or
 
-⚠️ Expo Go will NOT work.
-This project uses native modules (AsyncStorage, react-native-video).
-Use expo prebuild + dev client.
-
-1️⃣ Clone the project
-git clone https://github.com/KrzysiekWorwa/video-application-react-native.git
-cd video-application-react-native
-
-2️⃣ Install dependencies
-npm install
-# or
 yarn install
 
-3️⃣ Configure YouTube API key
+## 3️⃣ Configure YouTube API key
 
-Create a .env file:
+ Create a .env file:
 
-EXPO_PUBLIC_YT_API_KEY=YOUR_API_KEY
+ EXPO_PUBLIC_YT_API_KEY=YOUR_API_KEY
 
-4️⃣ Prebuild native projects
-npx expo prebuild
+## 4️⃣ Prebuild native projects
 
+ npx expo prebuild
 
 This generates native iOS & Android projects required for dev-client.
 
-5️⃣ Run the app
-Android:
-npx expo run:android
+## 5️⃣ Run the app
 
-iOS:
-npx expo run:ios
+ Android:
 
-👤 Author
+ npx expo run:android
 
-Krzysztof Worwa
-GitHub: https://github.com/KrzysiekWorwa
+ iOS:
+
+ npx expo run:ios
+
+## 👤 Author
+
+## Krzysztof Worwa
+
+GitHub: [https://github.com/KrzysiekWorwa](https://github.com/KrzysiekWorwa)
