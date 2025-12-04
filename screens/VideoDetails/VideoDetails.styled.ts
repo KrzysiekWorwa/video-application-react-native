@@ -139,6 +139,7 @@ export const NoteCard = styled.View`
     border-color: #c8c8c8;
     padding: 12px 12px;
     background-color: ${({ theme }) => theme.colors.background};
+    margin-top: 10px;
 `;
 
 export const NoteText = styled.Text`

@@ -3,7 +3,6 @@ import { useFetch } from "@/hooks/useFetch";
 import { getVideoDetails } from "@/services/api";
 import { useLocalSearchParams } from "expo-router";
 import { useState } from "react";
-import { Dimensions } from "react-native";
 import {
   AddNoteButton,
   AddNoteButtonText,
@@ -33,9 +32,6 @@ import {
   ViewsIcon,
 } from "./VideoDetails.styled";
 
-const { width } = Dimensions.get("window");
-const VIDEO_HEIGHT = width * 0.56;
-
 type ActiveTab = "details" | "notes";
 
 type Note = {
@@ -44,12 +40,19 @@ type Note = {
   time: string;
 };
 
+const formatTime = (seconds: number) => {
+  const mins = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60);
+  return `${mins}:${secs.toString().padStart(2, "0")}`;
+};
+
 export default function VideoDetails() {
   const { id } = useLocalSearchParams<{ id: string }>();
 
   const [activeTab, setActiveTab] = useState<ActiveTab>("details");
   const [notes, setNotes] = useState<Note[]>([]);
   const [noteText, setNoteText] = useState("");
+  const [currentTime, setCurrentTime] = useState(0);
 
   const { data: video, loading, error } = useFetch(
     () => getVideoDetails(id),
@@ -79,7 +82,7 @@ export default function VideoDetails() {
     const newNote: Note = {
       id: Date.now().toString(),
       text: trimmed,
-      time: "0:00",
+      time: formatTime(currentTime),
     };
 
     setNotes((prev) => [...prev, newNote]);
@@ -88,7 +91,7 @@ export default function VideoDetails() {
 
   return (
     <>
-      <VideoPlayer />
+      <VideoPlayer onProgress={setCurrentTime} />
 
       <InfoContaier>
         <VideoTitle numberOfLines={2}>{video.title}</VideoTitle>

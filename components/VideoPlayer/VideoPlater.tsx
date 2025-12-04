@@ -28,7 +28,11 @@ import {
     VolumeIcon,
 } from "./VideoPlayer.styled";
 
-export default function VideoPlayer() {
+type VideoPlayerProps = {
+    onProgress?: (seconds: number) => void;
+};
+
+export default function VideoPlayer({ onProgress }: VideoPlayerProps) {
     const {
         videoRef,
         VIDEO_SOURCE,
@@ -67,7 +71,10 @@ export default function VideoPlayer() {
                     resizeMode="cover"
                     paused={!isPlaying}
                     onLoad={handleLoad}
-                    onProgress={handleProgress}
+                    onProgress={(status) => {
+                        handleProgress(status);
+                        onProgress?.(status.currentTime ?? 0);
+                    }}
                     onError={(e) => console.log("VIDEO ERROR", e)}
                     muted={isMuted}
                     textTracks={textTracks}
