@@ -1,50 +1,171 @@
-# Welcome to your Expo app 👋
+# 📱 Video Learning App — React Native (Expo)
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A mobile learning application built as part of a recruitment assignment.  
+The app serves as a knowledge hub for developers, allowing users to browse categorized videos, search content using the YouTube API, watch videos in a custom video player, and create timestamped notes stored locally on the device.
 
-## Get started
+---
 
-1. Install dependencies
+## Tech Stack
 
-   ```bash
-   npm install
-   ```
+### **Core**
+- **React Native** — mobile framework  
+- **Expo** — build system & native tooling  
+- **Expo Router** — file-based navigation  
+- **TypeScript** — static typing  
+- **Styled Components** — UI styling  
 
-2. Start the app
+### **Native Modules**
+- **react-native-video** — custom video player  
+- **@react-native-async-storage/async-storage** — local notes storage  
+- **react-native-svg** + transformer — SVG icons  
+- **expo-screen-orientation** — fullscreen rotation lock  
+- **expo-font** — custom fonts (Poppins)
 
-   ```bash
-   npx expo start
-   ```
+### **API**
+- **YouTube Data API v3**  
+  - search videos  
+  - fetch metadata  
+  - fetch statistics  
+- `.env` support via Expo public variables
 
-In the output, you'll find options to open the app in a
+### **Custom Hooks**
+- `useVideoPlayer` — player logic (progress, fullscreen, gestures, subtitles)
+- `useSearchScreen` — search logic, sorting, pagination  
+- `useFetch` — reusable API loader  
+- `useDebounce` — input debouncing  
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+---
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## 📁 Project Structure
+src/
+├── app/ # Routing (Expo Router)
+├── components/ # Reusable UI components
+├── hooks/ # Custom hooks
+├── services/ # API communication (YouTube API)
+├── screens/ # App screens (Home, Search, VideoDetails)
+├── theme/ # Styled Components theme
+└── assets/ # Fonts, icons, images
 
-## Get a fresh project
+---
 
-When you're ready, run:
+## Implemented Features
 
-```bash
-npm run reset-project
-```
+### 1. Main Screen (Required)
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+- Four categories:
+  - React Native  
+  - React  
+  - TypeScript  
+  - JavaScript
+- Horizontal carousels for each category  
+- “Show More” → navigates to Search screen and showing more videos 
+- Search bar → navigates to Search screen
 
-## Learn more
+---
 
-To learn more about developing your project with Expo, look at the following resources:
+### ✔️ 2. Search Screen (Required)
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+#### Features:
+- YouTube API search with debounced input  
+- Infinite scrolling  
+- Displays:
+  - thumbnail  
+  - title  
+  - channel name  
+  - publish date  
+  - number of found results
+- Sorting:
+  - **Most popular**  
+  - **Upload date — latest**  
+  - **Upload date — oldest**
 
-## Join the community
+---
 
-Join our community of developers creating universal apps.
+### ✔️ 3. Video Details Screen (Required)
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Displays:
+- Video title  
+- Channel  
+- Description  
+- Views & Likes  
+
+#### 🎬 Custom Video Player (react-native-video)
+
+Supports:
+- Play / pause  
+- 10s forward / backward skip  
+- Mute / unmute  
+- Progress bar with draggable thumb  
+- Subtitles toggle  
+- Fullscreen mode with orientation lock  
+- Minimized mode in details view  
+
+**Subtitles file:**
+https://bitmovin-a.akamaihd.net/content/sintel/subtitles/subtitles_en.vtt
+
+**Video stream source:**
+https://bitmovin-a.akamaihd.net/content/sintel/hls/playlist.m3u8
+
+---
+
+### ✔️ 4. Local Notes System (Optional)
+
+Each video has a **Notes** tab.
+
+You can:
+- write notes during playback  
+- automatically capture video timestamp (MM:SS)  
+- store notes locally using AsyncStorage  
+- restore notes when revisiting the video  
+
+## 🚧 Not Implemented (Time Constraints)
+
+- Daily push notifications with scheduling
+
+---
+
+## 🛠️ Installation & Running
+
+> ⚠️ **Expo Go will NOT work — the app uses native modules.**
+
+## 1️⃣ Clone the project
+
+git clone [https://github.com/KrzysiekWorwa/video-application-react-native.git](https://github.com/KrzysiekWorwa/video-application-react-native.git)
+
+ cd video-application-react-native
+
+## 2️⃣ Install dependencies
+
+ npm install
+
+ or
+
+yarn install
+
+## 3️⃣ Configure YouTube API key
+
+ Create a .env file:
+
+ EXPO_PUBLIC_YT_API_KEY=YOUR_API_KEY
+
+## 4️⃣ Prebuild native projects
+
+ npx expo prebuild
+
+This generates native iOS & Android projects required for dev-client.
+
+## 5️⃣ Run the app
+
+ Android:
+
+ npx expo run:android
+
+ iOS:
+
+ npx expo run:ios
+
+## 👤 Author
+
+## Krzysztof Worwa
+
+GitHub: [https://github.com/KrzysiekWorwa](https://github.com/KrzysiekWorwa)
