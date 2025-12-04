@@ -1,6 +1,5 @@
 import { YoutubeVideo } from "@/services/api";
-import { Image } from "react-native";
-import { SearchCard, SearchChannelName, SearchPublishDate, SearchVideoTitle } from "./SearchSection.styled";
+import { SearchCard, SearchChannelName, SearchPublishDate, SearchVideoTitle, Thumbnail } from "./SearchSection.styled";
 
 type Props = {
   video: YoutubeVideo;
@@ -14,15 +13,8 @@ export function SearchSection({ video, onPress }: Props) {
 
   return (
     <SearchCard activeOpacity={0.8} onPress={onPress}>
-      <Image
-        source={{ uri: video.thumbnail }}
-        style={{
-          width: "100%",
-          height: 200,
-          borderRadius: 16,
-        }}
-        resizeMode="cover"
-      />
+
+      <Thumbnail source={{ uri: video.thumbnail }} />
 
       <SearchChannelName numberOfLines={1}>
         {video.channelTitle ?? "Channel name"}
